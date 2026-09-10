@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"inverse-on-surface":"#f3f0eb","secondary":"#4059aa","on-primary":"#ffffff","secondary-fixed-dim":"#b6c4ff","tertiary-fixed-dim":"#ffb77d","surface-container-low":"#f6f3ee","surface-variant":"#e5e2dd","primary-fixed":"#ffdbcf","on-surface-variant":"#57423b","on-primary-fixed":"#390c00","on-tertiary-fixed-variant":"#6e3900","on-secondary":"#ffffff","surface-container-lowest":"#ffffff","surface-bright":"#fcf9f4","on-secondary-fixed":"#00164e","surface-container-high":"#ebe8e3","on-primary-container":"#fffbff","on-tertiary":"#ffffff","tertiary":"#8d4b00","inverse-surface":"#31302d","on-surface":"#1c1c19","inverse-primary":"#ffb59c","primary-container":"#bf542c","on-tertiary-fixed":"#2f1500","outline":"#8a726a","tertiary-fixed":"#ffdcc3","surface-tint":"#a23e18","surface-container-highest":"#e5e2dd","on-secondary-container":"#1d3989","error":"#ba1a1a","on-error-container":"#93000a","primary":"#9f3c16","secondary-fixed":"#dce1ff","secondary-container":"#8fa7fe","on-tertiary-container":"#fffbff","surface-container":"#f0ede9","background":"#fcf9f4","on-background":"#1c1c19","on-error":"#ffffff","surface":"#fcf9f4","error-container":"#ffdad6","outline-variant":"#dec0b7","on-primary-fixed-variant":"#822801","surface-dim":"#dcdad5","tertiary-container":"#b15f00","primary-fixed-dim":"#ffb59c","on-secondary-fixed-variant":"#264191"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-xs":"0.25rem","gutter":"1.5rem","space-md":"1rem","gutter-mobile":"1rem","space-sm":"0.5rem","space-lg":"1.5rem","margin":"3rem","margin-mobile":"1.25rem","space-xl":"2.5rem"},"fontFamily":{"label-lg":["Plus Jakarta Sans"],"headline-xl":["Playfair Display"],"headline-xl-mobile":["Playfair Display"],"headline-md":["Playfair Display"],"label-sm":["Plus Jakarta Sans"],"headline-lg-mobile":["Playfair Display"],"headline-sm":["Playfair Display"],"headline-lg":["Playfair Display"],"body-sm":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"subhead-sm":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"subhead-lg":["Plus Jakarta Sans"]},"fontSize":{"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.02em","fontWeight":"600"}],"headline-xl":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-xl-mobile":["34px",{"lineHeight":"42px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-md":["26px",{"lineHeight":"34px","fontWeight":"600"}],"label-sm":["10px",{"lineHeight":"14px","letterSpacing":"0.06em","fontWeight":"700"}],"headline-lg-mobile":["26px",{"lineHeight":"34px","letterSpacing":"0em","fontWeight":"600"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],"headline-lg":["36px",{"lineHeight":"44px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"18px","fontWeight":"400"}],"body-md":["14px",{"lineHeight":"22px","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"26px","fontWeight":"400"}],"subhead-sm":["16px",{"lineHeight":"24px","fontWeight":"600"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"600"}],"subhead-lg":["18px",{"lineHeight":"26px","fontWeight":"500"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="w-full bg-surface-container-high py-1.5 px-gutter border-b border-surface-container-highest"><div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm"><span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span><p class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1.5"><span>Direct from Weaver &amp; Artisan Clusters</span><span class="text-outline-variant">•</span><span>Ministry of Textiles &amp; Pehchan Verified</span><span class="text-outline-variant">•</span><span>ONDC Enabled</span></p></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-1 text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer"><span class="material-symbols-outlined text-[16px]">volume_up</span><span class="font-label-sm text-label-sm">Audio Guide</span></div><div class="h-3 w-[1px] bg-outline-variant"></div><div class="flex items-center gap-1 text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">translate</span><select class="bg-transparent font-label-sm text-label-sm text-on-surface-variant focus:outline-none cursor-pointer pr-1"><option value="en">English</option><option value="hi">हिंदी</option><option value="ta">தமிழ்</option></select></div><div class="h-3 w-[1px] bg-outline-variant"></div><div class="flex items-center gap-space-sm"><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Artisan Portal</a><span class="text-outline-variant">/</span><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Admin Center</a></div></div></div></div><div class="h-20 max-w-7xl mx-auto px-gutter flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-md"><a class="flex items-center gap-3" data-path="marketplace-home" href="#"><img alt="KarigarSetu Brand Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XyZzJ-2AzacG95NxVHTtsNWLTn3MP7Hk7ymxKaXCbd2G8a1p5vHg4j2ujJmCoS4h0KX_HqmX86STeslNJ2XFswqQf-CXWbtUkQ1k1KobQkXTM6ZCoZ1ydLRj3xIIwrzvMelWuPEmyrun-rpjxDOHgtH7Xcae7PZRg-FgGZemdDHBM1Ss3xTgYFIA19Vu96nqUH7FSQCOySp-O1IJhZBMOL3Qh7VnEGMSmeQrcb0U6ikI2egRZi4x2gTEk"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm font-bold tracking-tight text-primary leading-none">KarigarSetu</span><span class="font-label-sm text-label-sm text-tertiary tracking-widest uppercase mt-0.5">कारीगर सेतु • GI Authenticated</span></div></a></div><div class="hidden md:flex flex-1 max-w-xl mx-space-md items-center relative"><div class="w-full flex items-center bg-surface-container-low rounded-xl px-space-md py-2 border border-surface-container-highest focus-within:border-primary transition-colors"><span class="material-symbols-outlined text-outline mr-2 text-[20px]">search</span><input class="w-full bg-transparent font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none" placeholder="Search handmade sarees, Dokra figurines, Blue Pottery..." type="text"/><button class="p-1 text-outline hover:text-primary transition-colors rounded-full" title="Vernacular Voice Search" type="button"><span class="material-symbols-outlined text-[18px]">mic</span></button></div></div><div class="flex items-center gap-space-md"><div class="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container border border-surface-container-highest"><span class="material-symbols-outlined text-primary text-[16px]">verified</span><span class="font-label-sm text-label-sm text-on-surface-variant">Pehchan Direct</span></div><a class="relative p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-xl transition-all" data-path="wishlist" href="#"><span class="material-symbols-outlined text-[22px]">favorite</span><span class="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-tertiary text-[9px] font-bold text-on-tertiary">4</span></a><a class="relative p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-xl transition-all" data-path="cart-and-checkout" href="#"><span class="material-symbols-outlined text-[22px]">shopping_bag</span><span class="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[9px] font-bold text-on-primary">2</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-sm ml-1"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><div class="w-full border-t border-surface-container-highest bg-surface/80 backdrop-blur-sm"><div class="max-w-7xl mx-auto px-gutter flex items-center justify-between"><nav class="flex items-center space-x-6 overflow-x-auto py-2.5" data-active-classes="text-primary font-bold border-b-2 border-primary"><a aria-current="page" class="transition-colors pb-1 whitespace-nowrap text-primary font-bold border-b-2 border-primary" data-path="marketplace-home" href="#">All Clusters</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors pb-1 whitespace-nowrap" data-path="handloom-weaves" href="#">Handloom Weaves</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors pb-1 whitespace-nowrap" data-path="terracotta-and-clay" href="#">Terracotta &amp; Clay</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors pb-1 whitespace-nowrap" data-path="dokra-metalcraft" href="#">Dokra Metalcraft</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors pb-1 whitespace-nowrap" data-path="woodcraft-and-inlay" href="#">Woodcraft &amp; Inlay</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors pb-1 whitespace-nowrap" data-path="tribal-jewelry" href="#">Tribal Jewelry</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors pb-1 whitespace-nowrap" data-path="gi-verified-directory" href="#">GI Certified</a></nav><div class="hidden sm:flex items-center gap-1 font-label-sm text-label-sm text-tertiary-container"><span class="material-symbols-outlined text-[16px]">loyalty</span><span>ODOP Verified Partner</span></div></div></div></header><main class="w-full pt-[156px] bg-surface flex-grow"><div class="max-w-4xl mx-auto px-4 py-12">
+<!-- Breadcrumb -->
+<nav aria-label="Breadcrumb" class="flex items-center gap-2 mb-6">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Home</a>
+<span class="text-outline-variant font-label-sm text-label-sm">/</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Legal &amp; Governance</span>
+<span class="text-outline-variant font-label-sm text-label-sm">/</span>
+<span class="font-label-sm text-label-sm text-primary font-semibold">Privacy Policy</span>
+</nav>
+<!-- Page Header with DPDP Act compliance badge -->
+<header class="mb-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm mb-3">
+<span class="material-symbols-outlined text-[15px]">verified_user</span>
+<span>DPDP Act 2023 Compliant • Digital Personal Data Protection</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mb-3">
+        Privacy Policy &amp; Artisan Data Sovereignty
+      </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+        At KalaSetu / KarigarSetu, digital privacy is rooted in artisan dignity. We strictly govern information handling under India's DPDP Act 2023, Ministry of Textiles guidelines, and decentralized ONDC registry protocols.
+      </p>
+</header>
+<!-- Controls Bar: Metadata, Download PDF, Search Input & Expand/Collapse Toggle -->
+<div class="bg-surface-container-low border border-outline-variant/40 rounded-xl p-4 mb-8 shadow-sm space-y-4">
+<div class="flex flex-wrap items-center justify-between gap-3">
+<div class="flex flex-wrap items-center gap-2">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface-variant border border-surface-container-highest">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            Last Updated: October 2024 • Version 2.5
+          </span>
+<span class="hidden sm:inline-flex items-center gap-1 text-xs text-on-surface-variant font-medium">
+<span class="material-symbols-outlined text-[15px] text-tertiary">gavel</span>
+            ONDC &amp; Ministry of Textiles Aligned
+          </span>
+</div>
+<div class="flex items-center gap-2">
+<button class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-surface text-on-surface hover:text-primary rounded-lg border border-outline-variant/60 shadow-sm transition-colors font-label-sm text-label-sm font-medium" type="button">
+<span class="material-symbols-outlined text-[16px] text-primary">download</span>
+<span>Download PDF</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-primary text-on-primary rounded-lg shadow-sm hover:bg-primary-container transition-colors font-label-sm text-label-sm font-medium" id="toggle-all-btn" type="button">
+<span class="material-symbols-outlined text-[16px]" id="toggle-all-icon">unfold_more</span>
+<span id="toggle-all-label">Expand All</span>
+</button>
+</div>
+</div>
+<!-- Search Input -->
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full pl-10 pr-10 py-2.5 bg-surface border border-outline-variant/60 rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" id="policy-search" placeholder="Search privacy topics, keywords (e.g. 'Aadhaar', 'voice notes', 'ONDC', 'deletion')..." type="text"/>
+<button aria-label="Clear search" class="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface transition-colors hidden" id="clear-search-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center justify-between" id="search-stats">
+<span>Showing all 6 policy sections</span>
+<span class="text-xs text-tertiary font-semibold">Tip: Click headers or use "Expand All"</span>
+</p>
+</div>
+<!-- Accordion Container -->
+<div class="space-y-4" id="accordion-container">
+<!-- Accordion 01 (Open by default) -->
+<div class="accordion-item border border-neutral-200 rounded-xl bg-white mb-4 shadow-sm transition hover:border-neutral-300 overflow-hidden" data-keywords="information collect artisan kyc aadhaar token pehchan id payout ifsc upi cluster workshop buyer shipping delivery address phone mobile audio logs catalog">
+<button aria-controls="acc-content-1" aria-expanded="true" class="accordion-header w-full flex items-center justify-between p-5 text-left bg-white hover:bg-surface-container-lowest/70 transition-colors focus:outline-none" type="button">
+<div class="flex items-start gap-4">
+<span class="section-pill flex-shrink-0 w-8 h-8 rounded-full bg-primary-fixed text-on-primary-fixed font-bold text-xs flex items-center justify-center font-mono">01</span>
+<div class="space-y-0.5">
+<h2 class="font-subhead-sm text-subhead-sm font-bold text-on-surface tracking-tight">Information We Collect</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">KYC identifiers, Pehchan artisan card metadata, DBT payout details, buyer delivery addresses, and catalog creation audio.</p>
+</div>
+</div>
+<div class="chevron-wrapper ml-4 flex-shrink-0 w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant transition-transform duration-200 rotate-180">
+<span class="material-symbols-outlined text-[20px]">expand_more</span>
+</div>
+</button>
+<div class="accordion-content px-5 pb-6 pt-1 border-t border-neutral-100" id="acc-content-1">
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 leading-relaxed">
+            We collect personal information strictly limited to verifying craft provenance, conducting unmediated fair-price DBT remittances, and enabling decentralized ONDC dispatch.
+          </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-4 rounded-xl border border-surface-container-highest space-y-2.5">
+<div class="flex items-center gap-2 text-primary font-semibold font-subhead-sm text-subhead-sm">
+<span class="material-symbols-outlined text-[20px]">engineering</span>
+<span>From Artisans &amp; Master Weavers</span>
+</div>
+<ul class="space-y-2 font-body-sm text-body-sm text-on-surface-variant">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary shrink-0 mt-0.5">check_circle</span>
+<span><strong>Tokenized Pehchan ID:</strong> Ministry of Textiles Artisan Card number and verified National Handicraft database metadata.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary shrink-0 mt-0.5">check_circle</span>
+<span><strong>DBT Payout Coordinates:</strong> Bank IFSC &amp; NPCI UPI Virtual Private Address (VPA) for direct unmediated payments.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary shrink-0 mt-0.5">check_circle</span>
+<span><strong>Loom Workshop Pin:</strong> Geo-cluster verification for craft authenticity without exposing residential residences.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary shrink-0 mt-0.5">check_circle</span>
+<span><strong>Vernacular Voice Transcripts:</strong> Audio notes spoken by weavers solely to document weave composition.</span>
+</li>
+</ul>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl border border-surface-container-highest space-y-2.5">
+<div class="flex items-center gap-2 text-secondary font-semibold font-subhead-sm text-subhead-sm">
+<span class="material-symbols-outlined text-[20px]">person_pin_circle</span>
+<span>From Connoisseurs &amp; Buyers</span>
+</div>
+<ul class="space-y-2 font-body-sm text-body-sm text-on-surface-variant">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary shrink-0 mt-0.5">check_circle</span>
+<span><strong>Delivery Details:</strong> Doorstep shipping address, postal PIN code, and pin-point drop instructions.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary shrink-0 mt-0.5">check_circle</span>
+<span><strong>Verification Contact:</strong> Mobile number used exclusively for secure OTP sign-in and parcel dispatch tracking.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary shrink-0 mt-0.5">check_circle</span>
+<span><strong>Tax Invoicing:</strong> Registered GSTIN data for corporate cultural gifting and legal tax credits.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary shrink-0 mt-0.5">check_circle</span>
+<span><strong>Order Receipts:</strong> Cryptographically logged tokenized transaction hashes for dispute mitigation.</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Accordion 02 -->
+<div class="accordion-item border border-neutral-200 rounded-xl bg-white mb-4 shadow-sm transition hover:border-neutral-300 overflow-hidden" data-keywords="purpose usage collected data order processing generating ai product descriptions fair pricing calculation logistics coordination ondc india post beckn direct settlement">
+<button aria-controls="acc-content-2" aria-expanded="false" class="accordion-header w-full flex items-center justify-between p-5 text-left bg-white hover:bg-surface-container-lowest/70 transition-colors focus:outline-none" type="button">
+<div class="flex items-start gap-4">
+<span class="section-pill flex-shrink-0 w-8 h-8 rounded-full bg-secondary-fixed text-on-secondary-fixed font-bold text-xs flex items-center justify-center font-mono">02</span>
+<div class="space-y-0.5">
+<h2 class="font-subhead-sm text-subhead-sm font-bold text-on-surface tracking-tight">Purpose &amp; Usage of Collected Data</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">Order orchestration, automated multi-lingual catalog descriptions, fair-wage calculations, and logistics via ONDC.</p>
+</div>
+</div>
+<div class="chevron-wrapper ml-4 flex-shrink-0 w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant transition-transform duration-200">
+<span class="material-symbols-outlined text-[20px]">expand_more</span>
+</div>
+</button>
+<div class="accordion-content px-5 pb-6 pt-1 border-t border-neutral-100 hidden" id="acc-content-2">
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 leading-relaxed">
+            KarigarSetu does not participate in programmatic ad auctions, behavioral profiling, or private data brokerage. Every byte gathered fulfills direct operational touchpoints:
+          </p>
+<div class="space-y-3">
+<div class="p-3.5 bg-surface-container-low rounded-lg flex items-start gap-3 border border-surface-container-highest">
+<div class="w-7 h-7 rounded bg-primary text-on-primary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">hub</span>
+</div>
+<div>
+<h3 class="font-subhead-sm text-subhead-sm text-on-surface font-semibold">Decentralized ONDC Protocol Orchestration</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                Transmitting encrypted catalog availability and delivery handshake tokens across ONDC Buyer Apps via the open-source Beckn protocol without exposing private buyer phone numbers or artisan accounts.
+              </p>
+</div>
+</div>
+<div class="p-3.5 bg-surface-container-low rounded-lg flex items-start gap-3 border border-surface-container-highest">
+<div class="w-7 h-7 rounded bg-tertiary text-on-tertiary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">currency_rupee</span>
+</div>
+<div>
+<h3 class="font-subhead-sm text-subhead-sm text-on-surface font-semibold">Automated Fair-Pricing &amp; Direct Remittances</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                Applying open benchmark formulas so that over 80% of consumer proceeds route directly to weaver accounts via NPCI switches, bypassing compounding middleman markups.
+              </p>
+</div>
+</div>
+<div class="p-3.5 bg-surface-container-low rounded-lg flex items-start gap-3 border border-surface-container-highest">
+<div class="w-7 h-7 rounded bg-secondary text-on-secondary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">local_shipping</span>
+</div>
+<div>
+<h3 class="font-subhead-sm text-subhead-sm text-on-surface font-semibold">Cluster-to-Doorstep Logistics Coordination</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                Integrating directly with India Post's Dak Ghar Niryat Kendra (DNK) and verified regional rural parcel hubs to coordinate collection directly from rural master weaver clusters.
+              </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Accordion 03 -->
+<div class="accordion-item border border-neutral-200 rounded-xl bg-white mb-4 shadow-sm transition hover:border-neutral-300 overflow-hidden" data-keywords="voice data ai processing protections raw voice notes speech catalog fields auto-purged 48h never sold synthetic deepfake cloning acoustic vernacular hindi tamil bundelkhandi">
+<button aria-controls="acc-content-3" aria-expanded="false" class="accordion-header w-full flex items-center justify-between p-5 text-left bg-white hover:bg-surface-container-lowest/70 transition-colors focus:outline-none" type="button">
+<div class="flex items-start gap-4">
+<span class="section-pill flex-shrink-0 w-8 h-8 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-bold text-xs flex items-center justify-center font-mono">03</span>
+<div class="space-y-0.5">
+<h2 class="font-subhead-sm text-subhead-sm font-bold text-on-surface tracking-tight">Voice Data &amp; AI Processing Protections</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">Raw vernacular audio is processed exclusively for product listings and automatically purged within 48 hours.</p>
+</div>
+</div>
+<div class="chevron-wrapper ml-4 flex-shrink-0 w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant transition-transform duration-200">
+<span class="material-symbols-outlined text-[20px]">expand_more</span>
+</div>
+</button>
+<div class="accordion-content px-5 pb-6 pt-1 border-t border-neutral-100 hidden" id="acc-content-3">
+<div class="p-4 bg-surface-container rounded-xl mb-4 space-y-2">
+<p class="font-body-md text-body-md text-on-surface">
+            Many revered master artisans share loom histories and thread specifications through oral traditions in vernacular languages (Hindi, Bundelkhandi, Chhattisgarhi, Odia, Gujarati, Tamil). Our assistive voice portal is shielded by strict cryptographic guarantees:
+          </p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+<div class="bg-surface-container-low p-4 rounded-xl border border-surface-container-highest">
+<div class="flex items-center gap-1.5 text-primary font-semibold font-label-sm text-label-sm mb-1.5">
+<span class="material-symbols-outlined text-[18px]">task_alt</span>
+<span>Single Purpose Mandate</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Audio input is processed strictly to extract craft descriptors, warp/weft specifications, and natural dye descriptions.
+            </p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl border border-surface-container-highest">
+<div class="flex items-center gap-1.5 text-primary font-semibold font-label-sm text-label-sm mb-1.5">
+<span class="material-symbols-outlined text-[18px]">timer</span>
+<span>48-Hour Hard Purge</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Raw audio recordings are permanently overwritten from temporary memory caches within 48 hours of textual transcription.
+            </p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl border border-surface-container-highest">
+<div class="flex items-center gap-1.5 text-primary font-semibold font-label-sm text-label-sm mb-1.5">
+<span class="material-symbols-outlined text-[18px]">block</span>
+<span>Zero Voice Cloning</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Audio files are NEVER syndicated, leased, or utilized to train commercial generative voice, voice-clone, or synthetic speech models.
+            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Accordion 04 -->
+<div class="accordion-item border border-neutral-200 rounded-xl bg-white mb-4 shadow-sm transition hover:border-neutral-300 overflow-hidden" data-keywords="third-party data sharing network apis pehchan api gi registry ondc directory india post licensed logistics zero monetization">
+<button aria-controls="acc-content-4" aria-expanded="false" class="accordion-header w-full flex items-center justify-between p-5 text-left bg-white hover:bg-surface-container-lowest/70 transition-colors focus:outline-none" type="button">
+<div class="flex items-start gap-4">
+<span class="section-pill flex-shrink-0 w-8 h-8 rounded-full bg-surface-container-highest text-on-surface font-bold text-xs flex items-center justify-center font-mono">04</span>
+<div class="space-y-0.5">
+<h2 class="font-subhead-sm text-subhead-sm font-bold text-on-surface tracking-tight">Third-Party Data Sharing &amp; Network APIs</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">Zero commercial monetization; minimal disclosure through sovereign India Stack rails and verified partners.</p>
+</div>
+</div>
+<div class="chevron-wrapper ml-4 flex-shrink-0 w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant transition-transform duration-200">
+<span class="material-symbols-outlined text-[20px]">expand_more</span>
+</div>
+</button>
+<div class="accordion-content px-5 pb-6 pt-1 border-t border-neutral-100 hidden" id="acc-content-4">
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 leading-relaxed">
+            Data sharing strictly transpires via sovereign digital infrastructure protocols and accredited logistical partners. We do not sell data to advertisers or commercial brokers under any circumstance.
+          </p>
+<div class="overflow-x-auto rounded-xl border border-surface-container-highest shadow-sm">
+<table class="w-full text-left font-body-sm text-body-sm">
+<thead class="bg-surface-container font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
+<tr>
+<th class="p-3">Integrated Gateway / Rail</th>
+<th class="p-3">Data Exchanged</th>
+<th class="p-3">Mandated Objective</th>
+<th class="p-3">Compliance Standard</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-high bg-surface-container-lowest">
+<tr>
+<td class="p-3 font-semibold text-on-surface">Ministry of Textiles (Pehchan API)</td>
+<td class="p-3 text-on-surface-variant">Artisan Card ID &amp; KYC Token</td>
+<td class="p-3 text-on-surface-variant">Authenticating genuine master weaver status</td>
+<td class="p-3"><span class="px-2 py-0.5 rounded bg-surface-container text-[11px] font-medium text-on-surface">Government REST API</span></td>
+</tr>
+<tr>
+<td class="p-3 font-semibold text-on-surface">ONDC Directory &amp; Beckn Registry</td>
+<td class="p-3 text-on-surface-variant">SKU details, fair price, hub PIN code</td>
+<td class="p-3 text-on-surface-variant">Decentralized pan-India buyer discovery</td>
+<td class="p-3"><span class="px-2 py-0.5 rounded bg-surface-container text-[11px] font-medium text-on-surface">Beckn Protocol 2.0</span></td>
+</tr>
+<tr>
+<td class="p-3 font-semibold text-on-surface">India Post / Licensed 3PL Couriers</td>
+<td class="p-3 text-on-surface-variant">Buyer Name, Delivery Address, PIN code</td>
+<td class="p-3 text-on-surface-variant">Rural dispatch and physical doorstep delivery</td>
+<td class="p-3"><span class="px-2 py-0.5 rounded bg-surface-container text-[11px] font-medium text-on-surface">Mandatory PII Purge NDA</span></td>
+</tr>
+<tr>
+<td class="p-3 font-semibold text-on-surface">NPCI &amp; RBI Payment Switches</td>
+<td class="p-3 text-on-surface-variant">Encrypted token &amp; remittance sum</td>
+<td class="p-3 text-on-surface-variant">Immediate unmediated direct DBT payout</td>
+<td class="p-3"><span class="px-2 py-0.5 rounded bg-surface-container text-[11px] font-medium text-on-surface">PCI-DSS / RBI Guidelines</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Accordion 05 -->
+<div class="accordion-item border border-neutral-200 rounded-xl bg-white mb-4 shadow-sm transition hover:border-neutral-300 overflow-hidden" data-keywords="data security retention user rights encryption aes-256 tokenization self-service account deletion export purge dpdp principal rights soc-2">
+<button aria-controls="acc-content-5" aria-expanded="false" class="accordion-header w-full flex items-center justify-between p-5 text-left bg-white hover:bg-surface-container-lowest/70 transition-colors focus:outline-none" type="button">
+<div class="flex items-start gap-4">
+<span class="section-pill flex-shrink-0 w-8 h-8 rounded-full bg-primary-fixed text-on-primary-fixed font-bold text-xs flex items-center justify-center font-mono">05</span>
+<div class="space-y-0.5">
+<h2 class="font-subhead-sm text-subhead-sm font-bold text-on-surface tracking-tight">Data Security, Retention &amp; User Rights</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">AES-256 encryption, sovereign India hosting, self-service account deletion, and JSON data export rights.</p>
+</div>
+</div>
+<div class="chevron-wrapper ml-4 flex-shrink-0 w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant transition-transform duration-200">
+<span class="material-symbols-outlined text-[20px]">expand_more</span>
+</div>
+</button>
+<div class="accordion-content px-5 pb-6 pt-1 border-t border-neutral-100 hidden" id="acc-content-5">
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 leading-relaxed">
+            All server clusters reside within the Republic of India at SOC-2 Type II certified data centers. In strict compliance with the DPDP Act 2023, data principals hold autonomous control over their digital identities:
+          </p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
+<div class="p-3 bg-surface-container-low rounded-lg border border-surface-container-highest">
+<div class="font-label-sm text-label-sm text-primary font-bold mb-1 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span>Field-Level AES-256 Encryption</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Bank accounts and Aadhaar numbers are salted and stored in cryptographically sealed vaults.</p>
+</div>
+<div class="p-3 bg-surface-container-low rounded-lg border border-surface-container-highest">
+<div class="font-label-sm text-label-sm text-primary font-bold mb-1 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">history_edu</span>
+<span>Right to Nomination &amp; Portability</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Master artisans can nominate guild representatives to oversee digital listings across generations.</p>
+</div>
+</div>
+<div class="p-4 bg-surface-container-high rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4 border border-outline-variant/40">
+<div>
+<h3 class="font-subhead-sm text-subhead-sm text-on-surface font-semibold">Autonomous Self-Service Privacy Desk</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                Download your complete JSON transaction history or permanently decommission your account and listings.
+              </p>
+</div>
+<div class="flex items-center gap-2.5 shrink-0">
+<button class="px-3.5 py-1.5 bg-surface text-primary border border-outline-variant/60 rounded-lg hover:bg-surface-container transition-colors font-label-sm text-label-sm font-semibold" type="button">
+                Export Data (JSON)
+              </button>
+<button class="px-3.5 py-1.5 bg-error text-on-error rounded-lg hover:opacity-90 transition-opacity font-label-sm text-label-sm font-semibold" type="button">
+                Delete Account
+              </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Accordion 06 -->
+<div class="accordion-item border border-neutral-200 rounded-xl bg-white mb-4 shadow-sm transition hover:border-neutral-300 overflow-hidden" data-keywords="grievance redressal support desk officer radhika sundaram grievance@karigarsetu.in national handloom bhavan new delhi 1800-425-kala toll-free helpline contacts">
+<button aria-controls="acc-content-6" aria-expanded="false" class="accordion-header w-full flex items-center justify-between p-5 text-left bg-white hover:bg-surface-container-lowest/70 transition-colors focus:outline-none" type="button">
+<div class="flex items-start gap-4">
+<span class="section-pill flex-shrink-0 w-8 h-8 rounded-full bg-tertiary-fixed-dim text-on-tertiary-fixed-variant font-bold text-xs flex items-center justify-center font-mono">06</span>
+<div class="space-y-0.5">
+<h2 class="font-subhead-sm text-subhead-sm font-bold text-on-surface tracking-tight">Grievance Redressal &amp; Support Desk</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">Designated Data Protection Officer, statutory 48-hour response window, and toll-free artisan voice assistance.</p>
+</div>
+</div>
+<div class="chevron-wrapper ml-4 flex-shrink-0 w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant transition-transform duration-200">
+<span class="material-symbols-outlined text-[20px]">expand_more</span>
+</div>
+</button>
+<div class="accordion-content px-5 pb-6 pt-1 border-t border-neutral-100 hidden" id="acc-content-6">
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 leading-relaxed">
+            In compliance with Rule 3(2) of the Information Technology (Intermediary Guidelines) Rules and Section 12 of the DPDP Act 2023, data principals may contact our dedicated Data Protection Officer:
+          </p>
+<div class="bg-surface-container-low p-5 rounded-xl border border-surface-container-highest space-y-4">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-3 border-b border-surface-container-highest">
+<div>
+<h3 class="font-headline-sm text-subhead-lg text-on-surface font-bold">Ms. Radhika Sundaram</h3>
+<p class="font-label-sm text-label-sm text-primary font-semibold">Chief Data Protection &amp; Ethics Officer (DPO)</p>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-surface font-label-sm text-label-sm text-on-surface-variant shadow-sm border border-outline-variant/40">
+<span class="material-symbols-outlined text-primary text-[16px]">schedule</span>
+<span>Statutory Response Window: ≤ 48 Working Hours</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-body-sm text-body-sm">
+<div class="space-y-1">
+<div class="font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[17px] text-primary">mail</span>
+<span>Grievance Email</span>
+</div>
+<a class="text-primary hover:underline font-medium block" href="mailto:grievance@karigarsetu.in">grievance@karigarsetu.in</a>
+<span class="text-xs text-on-surface-variant">PGP signature available upon request</span>
+</div>
+<div class="space-y-1">
+<div class="font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[17px] text-primary">support_agent</span>
+<span>Artisan Voice Hotline</span>
+</div>
+<span class="font-medium text-on-surface block">1800-425-KALA (Toll-Free)</span>
+<span class="text-xs text-on-surface-variant">Multi-dialect Hindi, Tamil, Bengali (9am - 7pm IST)</span>
+</div>
+<div class="space-y-1">
+<div class="font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[17px] text-primary">apartment</span>
+<span>Secretariat Office</span>
+</div>
+<p class="text-on-surface-variant text-xs leading-relaxed">
+                National Handloom Bhavan, 4th Floor, Janpath, Connaught Place, New Delhi 110001, India
+              </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- No Results Empty State (Hidden by default) -->
+<div class="hidden bg-white border border-neutral-200 rounded-xl p-8 text-center shadow-sm" id="empty-state">
+<span class="material-symbols-outlined text-[48px] text-outline mb-2">policy</span>
+<h3 class="font-subhead-sm text-subhead-sm font-bold text-on-surface mb-1">No matching policy sections found</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-md mx-auto mb-4">
+        We couldn't find any policy clauses matching your query. Try searching for broader terms such as "KYC", "ONDC", "voice", or "retention".
+      </p>
+<button class="px-4 py-1.5 bg-primary text-on-primary rounded-lg text-xs font-semibold hover:bg-primary-container transition-colors" id="reset-search-btn" type="button">
+        Reset Search Filter
+      </button>
+</div>
+<!-- Bottom Help Callout -->
+<div class="mt-8 p-4 bg-surface-container-low rounded-xl border border-surface-container-highest flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined text-[20px]">record_voice_over</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Prefer vernacular audio explanations?</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Listen to our simplified audio walkthrough available in 8 regional languages.</p>
+</div>
+</div>
+<button class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-surface text-primary border border-outline-variant/60 rounded-lg hover:bg-surface-container font-label-sm text-label-sm font-semibold whitespace-nowrap shadow-sm" type="button">
+<span class="material-symbols-outlined text-[17px]">volume_up</span>
+<span>Listen to Audio Summary</span>
+</button>
+</div>
+</div>
+<script>
+  (function() {
+    const searchInput = document.getElementById('policy-search');
+    const clearSearchBtn = document.getElementById('clear-search-btn');
+    const resetSearchBtn = document.getElementById('reset-search-btn');
+    const searchStats = document.getElementById('search-stats');
+    const emptyState = document.getElementById('empty-state');
+    const toggleAllBtn = document.getElementById('toggle-all-btn');
+    const toggleAllIcon = document.getElementById('toggle-all-icon');
+    const toggleAllLabel = document.getElementById('toggle-all-label');
+
+    const accordionItems = Array.from(document.querySelectorAll('.accordion-item'));
+
+    // State for Expand/Collapse All
+    let allExpanded = false;
+
+    // Accordion click toggle logic
+    accordionItems.forEach(item => {
+      const header = item.querySelector('.accordion-header');
+      const content = item.querySelector('.accordion-content');
+      const chevron = item.querySelector('.chevron-wrapper');
+
+      header.addEventListener('click', () => {
+        const isExpanded = header.getAttribute('aria-expanded') === 'true';
+        if (isExpanded) {
+          header.setAttribute('aria-expanded', 'false');
+          content.classList.add('hidden');
+          chevron.classList.remove('rotate-180');
+        } else {
+          header.setAttribute('aria-expanded', 'true');
+          content.classList.remove('hidden');
+          chevron.classList.add('rotate-180');
+        }
+        updateToggleAllButtonState();
+      });
+    });
+
+    function setItemState(item, expand) {
+      const header = item.querySelector('.accordion-header');
+      const content = item.querySelector('.accordion-content');
+      const chevron = item.querySelector('.chevron-wrapper');
+
+      if (expand) {
+        header.setAttribute('aria-expanded', 'true');
+        content.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+      } else {
+        header.setAttribute('aria-expanded', 'false');
+        content.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+      }
+    }
+
+    function updateToggleAllButtonState() {
+      const openItems = accordionItems.filter(item => {
+        const header = item.querySelector('.accordion-header');
+        return header.getAttribute('aria-expanded') === 'true';
+      });
+
+      if (openItems.length === accordionItems.length) {
+        allExpanded = true;
+        toggleAllIcon.textContent = 'unfold_less';
+        toggleAllLabel.textContent = 'Collapse All';
+      } else {
+        allExpanded = false;
+        toggleAllIcon.textContent = 'unfold_more';
+        toggleAllLabel.textContent = 'Expand All';
+      }
+    }
+
+    // Toggle All Click
+    toggleAllBtn.addEventListener('click', () => {
+      allExpanded = !allExpanded;
+      accordionItems.forEach(item => {
+        // Only modify if visible or during search
+        if (!item.classList.contains('hidden')) {
+          setItemState(item, allExpanded);
+        }
+      });
+      toggleAllIcon.textContent = allExpanded ? 'unfold_less' : 'unfold_more';
+      toggleAllLabel.textContent = allExpanded ? 'Collapse All' : 'Expand All';
+    });
+
+    // Real-time Search Logic
+    function filterPolicy() {
+      const query = (searchInput.value || '').trim().toLowerCase();
+
+      if (query.length > 0) {
+        clearSearchBtn.classList.remove('hidden');
+      } else {
+        clearSearchBtn.classList.add('hidden');
+      }
+
+      let visibleCount = 0;
+
+      accordionItems.forEach(item => {
+        const titleText = item.querySelector('h2').textContent.toLowerCase();
+        const bodyText = item.textContent.toLowerCase();
+        const keywords = (item.getAttribute('data-keywords') || '').toLowerCase();
+
+        const isMatch = !query || titleText.includes(query) || bodyText.includes(query) || keywords.includes(query);
+
+        if (isMatch) {
+          item.classList.remove('hidden');
+          visibleCount++;
+          // If searching with active query, auto-open matching item for convenience
+          if (query.length >= 2) {
+            setItemState(item, true);
+          }
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+
+      if (visibleCount === 0) {
+        emptyState.classList.remove('hidden');
+        searchStats.innerHTML = `<span>No sections match "<strong>${query}</strong>"</span><span class="text-xs text-error font-semibold">0 matches</span>`;
+      } else {
+        emptyState.classList.add('hidden');
+        if (query.length > 0) {
+          searchStats.innerHTML = `<span>Showing <strong>${visibleCount}</strong> of ${accordionItems.length} matching sections for "<strong>${query}</strong>"</span><span class="text-xs text-primary font-semibold">Filtered results</span>`;
+        } else {
+          searchStats.innerHTML = `<span>Showing all ${accordionItems.length} policy sections</span><span class="text-xs text-tertiary font-semibold">Tip: Click headers or use "Expand All"</span>`;
+        }
+      }
+
+      updateToggleAllButtonState();
+    }
+
+    searchInput.addEventListener('input', filterPolicy);
+
+    clearSearchBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      searchInput.focus();
+      filterPolicy();
+    });
+
+    resetSearchBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      filterPolicy();
+    });
+
+    // Initialize toggle state on page load
+    updateToggleAllButtonState();
+  })();
+</script></main><footer class="w-full bg-surface-container-low border-t border-surface-container-highest mt-auto pt-space-xl pb-space-lg"><div class="max-w-7xl mx-auto px-gutter"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-lg mb-space-xl"><div class="lg:col-span-2 space-y-space-md"><div class="flex items-center gap-3"><img alt="KarigarSetu Brand Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XyZzJ-2AzacG95NxVHTtsNWLTn3MP7Hk7ymxKaXCbd2G8a1p5vHg4j2ujJmCoS4h0KX_HqmX86STeslNJ2XFswqQf-CXWbtUkQ1k1KobQkXTM6ZCoZ1ydLRj3xIIwrzvMelWuPEmyrun-rpjxDOHgtH7Xcae7PZRg-FgGZemdDHBM1Ss3xTgYFIA19Vu96nqUH7FSQCOySp-O1IJhZBMOL3Qh7VnEGMSmeQrcb0U6ikI2egRZi4x2gTEk"/><span class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight">KarigarSetu</span></div><p class="font-body-md text-body-md text-on-surface-variant max-w-md">Bridging rural handloom weavers and master tribal artisans directly with conscious patrons across the globe. Built on India's Open Network for Digital Commerce (ONDC), ensuring full financial dignity and GI-provenance protection.</p><div class="flex flex-wrap items-center gap-3 pt-2"><div class="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-surface border border-outline-variant"><span class="material-symbols-outlined text-primary text-[18px]">verified_user</span><span class="font-label-sm text-label-sm text-on-surface">MoT Pehchan Verified</span></div><div class="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-surface border border-outline-variant"><span class="material-symbols-outlined text-tertiary text-[18px]">workspace_premium</span><span class="font-label-sm text-label-sm text-on-surface">100% GI Authenticated</span></div></div></div><div><h3 class="font-headline-sm text-subhead-sm text-on-surface font-semibold mb-space-md">Craft Clusters</h3><ul class="space-y-2 font-body-sm text-body-sm text-on-surface-variant"><li class="hover:text-primary transition-colors cursor-pointer"><span class="font-semibold text-on-surface">Chanderi</span>, Madhya Pradesh</li><li class="hover:text-primary transition-colors cursor-pointer"><span class="font-semibold text-on-surface">Bastar</span>, Chhattisgarh</li><li class="hover:text-primary transition-colors cursor-pointer"><span class="font-semibold text-on-surface">Varanasi</span>, Uttar Pradesh</li><li class="hover:text-primary transition-colors cursor-pointer"><span class="font-semibold text-on-surface">Kutch</span>, Gujarat</li><li class="hover:text-primary transition-colors cursor-pointer"><span class="font-semibold text-on-surface">Pochampally</span>, Telangana</li><li class="hover:text-primary transition-colors cursor-pointer"><span class="font-semibold text-on-surface">Kondapalli</span>, Andhra Pradesh</li></ul></div><div><h3 class="font-headline-sm text-subhead-sm text-on-surface font-semibold mb-space-md">Patron Trust &amp; Care</h3><ul class="space-y-2 font-body-sm text-body-sm text-on-surface-variant"><li><a class="hover:text-primary transition-colors" href="#">Artisan Fair-Price Pledge</a></li><li><a class="hover:text-primary transition-colors" href="#">Silk &amp; Craft Mark Tracking</a></li><li><a class="hover:text-primary transition-colors" href="#">Cluster Travel Chronicles</a></li><li><a class="hover:text-primary transition-colors" href="#">Custom Corporate Gifting</a></li><li><a class="hover:text-primary transition-colors" href="#">Buyer Protection Policy</a></li></ul></div><div><h3 class="font-headline-sm text-subhead-sm text-on-surface font-semibold mb-space-md">Craft Chronicles</h3><p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">Receive curated dispatches on heritage weaving traditions, loom tours, and limited artisan drops.</p><form class="flex flex-col gap-2"><input class="w-full px-3 py-2 bg-surface rounded border border-outline-variant font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary" placeholder="Enter your email address" type="email"/><button class="w-full py-2 bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md rounded transition-colors" type="submit">Subscribe to Dispatches</button></form></div></div><div class="border-t border-surface-container-highest pt-space-md flex flex-col sm:flex-row items-center justify-between gap-4"><p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 KarigarSetu Federation. Empowered by National Handloom Development Programme.</p><div class="flex items-center space-x-6"><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">ONDC Protocol Terms</a><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Geographical Indication Registry</a><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Artisan Privacy</a></div></div></div></footer></body></html>

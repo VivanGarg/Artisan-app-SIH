@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        primary: "#9f3c16",
+        "primary-hover": "#862f0e",
+        secondary: "#344e99",
+        surface: "#fcfaf7",
+        "surface-card": "#ffffff",
+        border: "#e5e0d8",
+        neutral: {
+          50: "#faf8f5",
+          100: "#f3efe8",
+          200: "#e6e0d5",
+          300: "#d3cbbf",
+          400: "#9c9387",
+          500: "#70675c",
+          600: "#554d43",
+          700: "#3d362e",
+          800: "#27221b",
+          900: "#181410"
+        }
+      },
+      fontFamily: {
+        sans: ["Plus Jakarta Sans", "sans-serif"],
+        serif: ["Playfair Display", "serif"]
+      }
+    }
+  }
+}
+</script></head><body class="bg-neutral-50 font-sans text-neutral-800 antialiased min-h-screen flex flex-col selection:bg-primary/15 selection:text-primary">
+<!-- Subtle Sticky Announcement & Utility Nav -->
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-neutral-200">
+<div class="w-full bg-neutral-100 py-2 px-4 sm:px-8 border-b border-neutral-200 text-xs text-neutral-600">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="inline-block w-2 h-2 rounded-full bg-primary"></span>
+<span>ONDC Verified Handloom &amp; Handicrafts Directory</span>
+<span class="text-neutral-400 hidden sm:inline">•</span>
+<span class="hidden sm:inline">Direct artisan wage transfer</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="cursor-pointer hover:text-neutral-900 transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">translate</span>
+          English
+        </span>
+<a class="hover:text-neutral-900 transition-colors" href="#">Artisan Sign-In</a>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-4 sm:px-8 h-18 py-3.5 flex items-center justify-between gap-6">
+<!-- Brand -->
+<a class="flex items-center gap-3.5" href="#">
+<img alt="KalaSetu Brand Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XyZzJ-2AzacG95NxVHTtsNWLTn3MP7Hk7ymxKaXCbd2G8a1p5vHg4j2ujJmCoS4h0KX_HqmX86STeslNJ2XFswqQf-CXWbtUkQ1k1KobQkXTM6ZCoZ1ydLRj3xIIwrzvMelWuPEmyrun-rpjxDOHgtH7Xcae7PZRg-FgGZemdDHBM1Ss3xTgYFIA19Vu96nqUH7FSQCOySp-O1IJhZBMOL3Qh7VnEGMSmeQrcb0U6ikI2egRZi4x2gTEk"/>
+<div class="flex flex-col">
+<span class="font-serif text-2xl font-bold tracking-tight text-primary leading-none">KalaSetu</span>
+<span class="text-[10px] tracking-widest uppercase text-neutral-500 font-medium mt-0.5">Loom Direct &amp; GI Verified</span>
+</div>
+</a>
+<!-- Clean Central Search -->
+<div class="hidden md:flex flex-1 max-w-lg items-center relative">
+<span class="material-symbols-outlined absolute left-3.5 text-neutral-400 text-[18px]">search</span>
+<input class="w-full pl-10 pr-4 py-2 text-sm bg-neutral-100 hover:bg-neutral-50 focus:bg-white border border-neutral-200 rounded-full focus:outline-none focus:border-primary transition-all placeholder:text-neutral-400 text-neutral-800" placeholder="Search GI crafts, weaves, pottery, Dokra..." type="text"/>
+</div>
+<!-- Quick Actions -->
+<div class="flex items-center gap-3">
+<button aria-label="Saved items" class="w-9 h-9 flex items-center justify-center rounded-full text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 transition-colors">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+<button aria-label="Shopping Cart" class="flex items-center gap-2 py-1.5 px-3 rounded-full text-neutral-700 hover:bg-neutral-100 border border-neutral-200 text-xs font-medium transition-colors">
+<span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+<span>Cart</span>
+<span class="bg-primary text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">2</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-grow w-full">
+<!-- Header & Context Banner -->
+<section class="border-b border-neutral-200 bg-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-8 py-10 sm:py-12">
+<!-- Breadcrumb & Tag -->
+<div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+<nav aria-label="Breadcrumbs" class="flex items-center gap-1.5 text-xs text-neutral-500">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="material-symbols-outlined text-[12px] text-neutral-400">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Authentic Crafts</a>
+<span class="material-symbols-outlined text-[12px] text-neutral-400">chevron_right</span>
+<span class="text-neutral-800 font-medium">GI Catalog</span>
+</nav>
+<span class="text-xs font-medium text-neutral-500 bg-neutral-100 px-3 py-1 rounded-full border border-neutral-200">
+          1,428 Verified Crafts
+        </span>
+</div>
+<!-- Clean Headline -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="font-serif text-3xl sm:text-4xl text-neutral-900 font-medium tracking-tight">
+            Handcrafted Masterpieces
+          </h1>
+<p class="text-neutral-500 text-sm mt-1.5 max-w-2xl font-light">
+            Sourced directly from certified karigars across India's premier GI clusters. Every acquisition sustains verified artisan livelihoods.
+          </p>
+</div>
+<!-- Sorting -->
+<div class="flex items-center gap-2 self-start md:self-end">
+<span class="text-xs text-neutral-500 whitespace-nowrap">Sort:</span>
+<div class="relative">
+<select class="appearance-none bg-neutral-50 text-neutral-700 text-xs font-medium py-2 pl-3 pr-8 rounded-lg border border-neutral-200 focus:outline-none focus:border-primary cursor-pointer">
+<option>Curated &amp; Popular</option>
+<option>Price: Low to High</option>
+<option>Price: High to Low</option>
+<option>Ready to Ship (48h)</option>
+<option>Master Karigar Heritage</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-neutral-400 text-[16px]">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Horizontal Scrollable Quick-Toggle Pill Bar -->
+<section class="border-b border-neutral-200 bg-white/70 backdrop-blur-sm sticky top-[105px] z-40">
+<div class="max-w-7xl mx-auto px-4 sm:px-8 py-3 flex items-center justify-between gap-4">
+<div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+<button class="lg:hidden flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-neutral-700 bg-neutral-100 rounded-full border border-neutral-300 hover:bg-neutral-200 transition-colors whitespace-nowrap" id="sidebarToggleBtn">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+          Filters
+        </button>
+<span class="text-xs text-neutral-400 font-medium mr-1 hidden sm:inline">Quick Filters:</span>
+<button class="flex items-center gap-1 px-3.5 py-1.5 rounded-full text-xs font-medium bg-primary text-white shadow-sm border border-primary transition-all whitespace-nowrap">
+<span class="material-symbols-outlined text-[14px]">check</span>
+          GI Certified
+        </button>
+<button class="flex items-center gap-1 px-3.5 py-1.5 rounded-full text-xs font-medium bg-neutral-50 hover:bg-neutral-100 text-neutral-700 border border-neutral-200 transition-all whitespace-nowrap">
+          Ready to Ship (48h)
+        </button>
+<button class="flex items-center gap-1 px-3.5 py-1.5 rounded-full text-xs font-medium bg-neutral-50 hover:bg-neutral-100 text-neutral-700 border border-neutral-200 transition-all whitespace-nowrap">
+          Under ₹5,000
+        </button>
+<button class="flex items-center gap-1 px-3.5 py-1.5 rounded-full text-xs font-medium bg-neutral-50 hover:bg-neutral-100 text-neutral-700 border border-neutral-200 transition-all whitespace-nowrap">
+          Pehchan Verified
+        </button>
+<button class="flex items-center gap-1 px-3.5 py-1.5 rounded-full text-xs font-medium bg-neutral-50 hover:bg-neutral-100 text-neutral-700 border border-neutral-200 transition-all whitespace-nowrap">
+          Natural Fibers
+        </button>
+</div>
+<button class="text-xs text-neutral-500 hover:text-primary transition-colors whitespace-nowrap font-medium hidden md:block">
+        Reset All
+      </button>
+</div>
+</section>
+<!-- Main Discovery Grid Layout (py-12 to py-16 for generous calm whitespace) -->
+<section class="max-w-7xl mx-auto px-4 sm:px-8 py-12 lg:py-16">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Simplified Accordion Sidebar -->
+<aside class="lg:col-span-3 hidden lg:block bg-white rounded-xl border border-neutral-200 p-5 shadow-sm" id="sidebarFilter">
+<div class="flex items-center justify-between pb-4 border-b border-neutral-100">
+<div class="flex items-center gap-2 text-sm font-semibold text-neutral-900">
+<span class="material-symbols-outlined text-[18px] text-neutral-600">tune</span>
+            Filters
+          </div>
+<button class="text-xs text-neutral-500 hover:text-primary transition-colors">Clear</button>
+</div>
+<div class="divide-y divide-neutral-100 text-sm">
+<!-- Accordion 1: Craft Type -->
+<div class="py-4">
+<details class="group" open="">
+<summary class="flex justify-between items-center font-medium text-neutral-800 cursor-pointer list-none select-none">
+<span>Craft Category</span>
+<span class="material-symbols-outlined text-[18px] text-neutral-400 group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="mt-3 space-y-2 text-xs text-neutral-600">
+<label class="flex items-center justify-between hover:text-neutral-900 cursor-pointer">
+<span class="flex items-center gap-2">
+<input checked="" class="w-3.5 h-3.5 rounded border-neutral-300 text-primary focus:ring-0" type="checkbox"/>
+                    Handloom Weaves
+                  </span>
+<span class="text-neutral-400">420</span>
+</label>
+<label class="flex items-center justify-between hover:text-neutral-900 cursor-pointer">
+<span class="flex items-center gap-2">
+<input checked="" class="w-3.5 h-3.5 rounded border-neutral-300 text-primary focus:ring-0" type="checkbox"/>
+                    Dokra Metalcraft
+                  </span>
+<span class="text-neutral-400">188</span>
+</label>
+<label class="flex items-center justify-between hover:text-neutral-900 cursor-pointer">
+<span class="flex items-center gap-2">
+<input class="w-3.5 h-3.5 rounded border-neutral-300 text-primary focus:ring-0" type="checkbox"/>
+                    Terracotta &amp; Clay
+                  </span>
+<span class="text-neutral-400">142</span>
+</label>
+<label class="flex items-center justify-between hover:text-neutral-900 cursor-pointer">
+<span class="flex items-center gap-2">
+<input class="w-3.5 h-3.5 rounded border-neutral-300 text-primary focus:ring-0" type="checkbox"/>
+                    Woodcraft &amp; Inlay
+                  </span>
+<span class="text-neutral-400">96</span>
+</label>
+</div>
+</details>
+</div>
+<!-- Accordion 2: State / Cluster -->
+<div class="py-4">
+<details class="group" open="">
+<summary class="flex justify-between items-center font-medium text-neutral-800 cursor-pointer list-none select-none">
+<span>Cluster / Origin</span>
+<span class="material-symbols-outlined text-[18px] text-neutral-400 group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="mt-3 space-y-2 text-xs text-neutral-600">
+<label class="flex items-center justify-between hover:text-neutral-900 cursor-pointer">
+<span class="flex items-center gap-2">
+<input checked="" class="w-3.5 h-3.5 rounded border-neutral-300 text-primary focus:ring-0" type="checkbox"/>
+                    Madhya Pradesh (Chanderi)
+                  </span>
+<span class="text-neutral-400">148</span>
+</label>
+<label class="flex items-center justify-between hover:text-neutral-900 cursor-pointer">
+<span class="flex items-center gap-2">
+<input checked="" class="w-3.5 h-3.5 rounded border-neutral-300 text-primary focus:ring-0" type="checkbox"/>
+                    Chhattisgarh (Bastar)
+                  </span>
+<span class="text-neutral-400">92</span>
+</label>
+<label class="flex items-center justify-between hover:text-neutral-900 cursor-pointer">
+<span class="flex items-center gap-2">
+<input class="w-3.5 h-3.5 rounded border-neutral-300 text-primary focus:ring-0" type="checkbox"/>
+                    Rajasthan (Jaipur)
+                  </span>
+<span class="text-neutral-400">204</span>
+</label>
+<label class="flex items-center justify-between hover:text-neutral-900 cursor-pointer">
+<span class="flex items-center gap-2">
+<input class="w-3.5 h-3.5 rounded border-neutral-300 text-primary focus:ring-0" type="checkbox"/>
+                    Uttar Pradesh (Varanasi)
+                  </span>
+<span class="text-neutral-400">186</span>
+</label>
+</div>
+</details>
+</div>
+<!-- Accordion 3: Price Range Slider -->
+<div class="py-4">
+<details class="group" open="">
+<summary class="flex justify-between items-center font-medium text-neutral-800 cursor-pointer list-none select-none">
+<span>Price Range</span>
+<span class="material-symbols-outlined text-[18px] text-neutral-400 group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="mt-4">
+<input class="w-full accent-primary h-1 bg-neutral-200 rounded-lg cursor-pointer" max="25000" min="500" step="500" type="range" value="7000"/>
+<div class="flex justify-between items-center text-xs text-neutral-500 mt-2 font-mono">
+<span>₹500</span>
+<span class="font-medium text-neutral-900 bg-neutral-100 px-2 py-0.5 rounded border border-neutral-200">Up to ₹7,000</span>
+<span>₹25,000</span>
+</div>
+</div>
+</details>
+</div>
+</div>
+</aside>
+<!-- Right: Simplified 3-Col Product Grid -->
+<div class="lg:col-span-9 flex flex-col gap-10">
+<!-- Grid of 6 Clean Products -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Product Card 1 -->
+<article class="group bg-white rounded-xl border border-neutral-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+<div class="p-3">
+<!-- High Quality Craft Image with Subtle Rounded Corners -->
+<div class="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-neutral-100">
+<img alt="Chanderi Zari Silk Festive Saree" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Chanderi zari silk handloom saree in rich blush terracotta and gold border, elegantly draped over an authentic wooden handloom shuttle in an artisan's sunny studio in Madhya Pradesh, cinematic warm morning sunlight, highly detailed fabric texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAz4d9ZVlqo31tAeS2WpU39BA8EVoMEfetlk30cBZ5N3ek1HzSXXs-kFu5_tyfERqxGhQwHEl3z_QVMg3ieblTeVGMQfbzAcFSNMJ5nRYZ9udwPxlbpYYgivpNuT21QdVtheWcQIUl5tnyaCkyVVvQlkMOuYXOA64SV_jzRlAeT6ov9uXDj8NUhxqZpUcibhysPz2sm3XnxpCG-576_UVElKtT6fJVz5AIchXWFfY-heNlIGZ6bnuvM"/>
+<button aria-label="Add to Wishlist" class="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/90 backdrop-blur text-neutral-600 hover:text-primary flex items-center justify-center shadow-sm transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<!-- Content: Exactly 3 essential text elements -->
+<div class="pt-3.5 pb-1 px-1">
+<!-- Title -->
+<h3 class="font-medium text-neutral-900 text-base leading-snug group-hover:text-primary transition-colors">
+                  Chanderi Zari Silk Saree
+                </h3>
+<!-- Artisan Name & Region with Tiny Verified Check -->
+<p class="text-xs text-neutral-500 flex items-center gap-1 mt-1">
+<span>Rameshwar Ansari • Chanderi, MP</span>
+<span class="material-symbols-outlined text-primary text-[14px]" title="GI &amp; Pehchan Verified">verified</span>
+</p>
+</div>
+</div>
+<!-- Price & Accessible Cart CTA -->
+<div class="px-4 pb-4 pt-2 flex items-center justify-between border-t border-neutral-100">
+<span class="text-base font-semibold text-neutral-900 font-mono">₹6,450</span>
+<button class="px-3.5 py-1.5 rounded-lg bg-neutral-900 hover:bg-primary text-white text-xs font-medium transition-colors flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[15px]">shopping_bag</span>
+<span>Cart</span>
+</button>
+</div>
+</article>
+<!-- Product Card 2 -->
+<article class="group bg-white rounded-xl border border-neutral-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+<div class="p-3">
+<div class="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-neutral-100">
+<img alt="Bastar Dokra Lost-Wax Bell Metal Deer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Traditional Dokra brass tribal dancing deer figurine crafted with lost-wax bell metal casting technique, standing on an earthy rustic sandstone block, dramatic side lighting highlighting the raw textured molten metal threads, warm terracotta ambiance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCo48Q-pkofgBDRmntqviwLlFSBz-XFSJn8s2bae1aImTLOMc1W3VKabrW_2qbBd_rmNoJYoqCg2OyCNX8L2DamrwQyzyNXRNkYnN-K6Sw7ctP6M9EFMZZQJi1GxXAiObmqzI5XO0QYeeCJOGj2Wl6shaWmZxCN8W0-q_blza9kwCD7zT9lLvbyGiIgIx4s5pHqL7DirtieXSeiXrvGPtzTCT_fAAdmRrkOvHUyuswSqJC0MCj4X2hE"/>
+<button aria-label="Add to Wishlist" class="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/90 backdrop-blur text-neutral-600 hover:text-primary flex items-center justify-center shadow-sm transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="pt-3.5 pb-1 px-1">
+<h3 class="font-medium text-neutral-900 text-base leading-snug group-hover:text-primary transition-colors">
+                  Bastar Dokra Metal Deer
+                </h3>
+<p class="text-xs text-neutral-500 flex items-center gap-1 mt-1">
+<span>Budhram Baghel • Bastar, CG</span>
+<span class="material-symbols-outlined text-primary text-[14px]" title="GI &amp; Pehchan Verified">verified</span>
+</p>
+</div>
+</div>
+<div class="px-4 pb-4 pt-2 flex items-center justify-between border-t border-neutral-100">
+<span class="text-base font-semibold text-neutral-900 font-mono">₹2,890</span>
+<button class="px-3.5 py-1.5 rounded-lg bg-neutral-900 hover:bg-primary text-white text-xs font-medium transition-colors flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[15px]">shopping_bag</span>
+<span>Cart</span>
+</button>
+</div>
+</article>
+<!-- Product Card 3 -->
+<article class="group bg-white rounded-xl border border-neutral-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+<div class="p-3">
+<div class="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-neutral-100">
+<img alt="Jaipur Cobalt Quartz Blue Pottery Vase" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Traditional Jaipur blue pottery decorative floral vase painted with Persian cobalt blue and turquoise botanical motifs, resting on a white lime-plaster shelf against an earthy clay wall, soft natural courtyard light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxEYjr3qICgc8EBjNahl5cChrxyuZZZIg76J3XDFKIdU2EPglgmrRornsQH84l7Ltk_R5xjRaKzump6zTr4U1OEXkmZmspK3Tb6fRIajO2kO0gu2Lef-LeGeb9Q4W31gTRgbzxv8uC72RNBjWZmOmA8uOp2twb4vGNh_5DMCdAN5_pg9O_n4WDekVDgJtbj00n4glSD7cYI8Usyu2AFz5tpArs4S-UOymwaZzk9MRrHfnneK5kLT7t"/>
+<button aria-label="Add to Wishlist" class="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/90 backdrop-blur text-neutral-600 hover:text-primary flex items-center justify-center shadow-sm transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="pt-3.5 pb-1 px-1">
+<h3 class="font-medium text-neutral-900 text-base leading-snug group-hover:text-primary transition-colors">
+                  Blue Pottery Botanical Vase
+                </h3>
+<p class="text-xs text-neutral-500 flex items-center gap-1 mt-1">
+<span>Gayatri Devi • Jaipur, RJ</span>
+<span class="material-symbols-outlined text-primary text-[14px]" title="GI &amp; Pehchan Verified">verified</span>
+</p>
+</div>
+</div>
+<div class="px-4 pb-4 pt-2 flex items-center justify-between border-t border-neutral-100">
+<span class="text-base font-semibold text-neutral-900 font-mono">₹1,750</span>
+<button class="px-3.5 py-1.5 rounded-lg bg-neutral-900 hover:bg-primary text-white text-xs font-medium transition-colors flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[15px]">shopping_bag</span>
+<span>Cart</span>
+</button>
+</div>
+</article>
+<!-- Product Card 4 -->
+<article class="group bg-white rounded-xl border border-neutral-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+<div class="p-3">
+<div class="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-neutral-100">
+<img alt="Pure Katan Silk Kadwa Weave Dupatta" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Varanasi pure katan silk dupatta with fine kadwa gold zari butas in rich royal indigo and rust orange, draped over a wooden banarasi pit loom in an old courtyard house of Varanasi, warm golden hour illumination." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhUk68KSOQmzVOl6BC_eTEvQ8dqONE3j_j4wkn4TLfv4NbfaU0dxCQBCNoE6rFl6HCV23XL12GamMaIep1hnfbI5t2TzZzylmbOyNfYmnKGDAMY62JwM6HiwD9Y2pGyY1xxtZ3-FWGPjvQC9ThzZLjvj4MJoPFtHR_VMayYyVj1Labv5m7yW-Ici7Wo5Bvo4MadQsrFAlyUQUJ6AEz58AJb2g1snsSyJXh6qz00lzT3CiZSEM5R3Ad"/>
+<button aria-label="Add to Wishlist" class="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/90 backdrop-blur text-neutral-600 hover:text-primary flex items-center justify-center shadow-sm transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="pt-3.5 pb-1 px-1">
+<h3 class="font-medium text-neutral-900 text-base leading-snug group-hover:text-primary transition-colors">
+                  Pure Katan Silk Dupatta
+                </h3>
+<p class="text-xs text-neutral-500 flex items-center gap-1 mt-1">
+<span>Kallu Miyan • Varanasi, UP</span>
+<span class="material-symbols-outlined text-primary text-[14px]" title="GI &amp; Pehchan Verified">verified</span>
+</p>
+</div>
+</div>
+<div class="px-4 pb-4 pt-2 flex items-center justify-between border-t border-neutral-100">
+<span class="text-base font-semibold text-neutral-900 font-mono">₹4,200</span>
+<button class="px-3.5 py-1.5 rounded-lg bg-neutral-900 hover:bg-primary text-white text-xs font-medium transition-colors flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[15px]">shopping_bag</span>
+<span>Cart</span>
+</button>
+</div>
+</article>
+<!-- Product Card 5 -->
+<article class="group bg-white rounded-xl border border-neutral-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+<div class="p-3">
+<div class="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-neutral-100">
+<img alt="Bankura Hand-Burnished Terracotta Horse" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Handcrafted Bankura terracotta horse figurine from Panchmura with tall pointed ears and intricate pinched clay neck details, natural unglazed burnished terracotta red clay, photographed against warm jute fabric." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_QzcPr7X31h4av6W_aQ_kZeuzP9X22U37PGWUxdFdLexPAl70tRB1WRaPHiwmQyTiwe2WWk5WWmfb8mHq1_c0HwVIG58QyWvjBbiV-vJLpQEdJVXORMVbbmPCYQzB3zFToo9PwbbJlX_zUtb3LVxUHx4sC5OY7DZLzTIdinp4-X6b9KV4syvXmXOy5wBYJ18zFN9Gq2usnS0QQDKjByjdUDbpQdxNIJoqT7gAz5Dv-HG4bBqpokaP"/>
+<button aria-label="Add to Wishlist" class="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/90 backdrop-blur text-neutral-600 hover:text-primary flex items-center justify-center shadow-sm transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="pt-3.5 pb-1 px-1">
+<h3 class="font-medium text-neutral-900 text-base leading-snug group-hover:text-primary transition-colors">
+                  Bankura Terracotta Horse
+                </h3>
+<p class="text-xs text-neutral-500 flex items-center gap-1 mt-1">
+<span>Shyamal Kumbhakar • Bankura, WB</span>
+<span class="material-symbols-outlined text-primary text-[14px]" title="GI &amp; Pehchan Verified">verified</span>
+</p>
+</div>
+</div>
+<div class="px-4 pb-4 pt-2 flex items-center justify-between border-t border-neutral-100">
+<span class="text-base font-semibold text-neutral-900 font-mono">₹1,200</span>
+<button class="px-3.5 py-1.5 rounded-lg bg-neutral-900 hover:bg-primary text-white text-xs font-medium transition-colors flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[15px]">shopping_bag</span>
+<span>Cart</span>
+</button>
+</div>
+</article>
+<!-- Product Card 6 -->
+<article class="group bg-white rounded-xl border border-neutral-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+<div class="p-3">
+<div class="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-neutral-100">
+<img alt="Walnut Wood Carved Chinar Leaf Keepsake Box" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Intricately carved Kashmiri walnut wood keepsake jewelry box featuring openwork chinar leaf motifs, seasoned dark polished seasoned timber, soft natural studio light on dark stone." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvpYAcNNZZcbDx91uieB2EHoOlptBjCwFryVupboU9cctHv3ujqWXQ00019GYH8Ca8noQ8CQ7U9A20KSzLeNnJM9-7yaAfemDIicq_Oj7jntMOwaas8e596JO05Hykj_jTpacErb3PoDYK0xZjw_HRv6TK-Zari-o3F3WLvxJnQi-M-RTmHni4MrpovJPKDurtjaHvKxAVkBU3Kj6UACdW5G0dxp-zRk98nNIDUm2BsiZWCcffqRt3"/>
+<button aria-label="Add to Wishlist" class="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/90 backdrop-blur text-neutral-600 hover:text-primary flex items-center justify-center shadow-sm transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="pt-3.5 pb-1 px-1">
+<h3 class="font-medium text-neutral-900 text-base leading-snug group-hover:text-primary transition-colors">
+                  Carved Walnut Keepsake Box
+                </h3>
+<p class="text-xs text-neutral-500 flex items-center gap-1 mt-1">
+<span>Farooq Ahmad • Srinagar, JK</span>
+<span class="material-symbols-outlined text-primary text-[14px]" title="GI &amp; Pehchan Verified">verified</span>
+</p>
+</div>
+</div>
+<div class="px-4 pb-4 pt-2 flex items-center justify-between border-t border-neutral-100">
+<span class="text-base font-semibold text-neutral-900 font-mono">₹3,150</span>
+<button class="px-3.5 py-1.5 rounded-lg bg-neutral-900 hover:bg-primary text-white text-xs font-medium transition-colors flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[15px]">shopping_bag</span>
+<span>Cart</span>
+</button>
+</div>
+</article>
+</div>
+<!-- Clean, Centered Pagination Pills -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-neutral-200">
+<p class="text-xs text-neutral-500">
+            Showing <span class="font-medium text-neutral-800">1 – 6</span> of <span class="font-medium text-neutral-800">1,428</span> verified crafts
+          </p>
+<nav aria-label="Pagination" class="flex items-center gap-1.5">
+<button class="w-8 h-8 rounded-lg border border-neutral-200 text-neutral-400 flex items-center justify-center disabled:opacity-40" disabled="">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-primary text-white text-xs font-medium flex items-center justify-center shadow-sm">
+              1
+            </button>
+<button class="w-8 h-8 rounded-lg border border-neutral-200 text-neutral-700 hover:bg-neutral-100 text-xs font-medium flex items-center justify-center transition-colors">
+              2
+            </button>
+<button class="w-8 h-8 rounded-lg border border-neutral-200 text-neutral-700 hover:bg-neutral-100 text-xs font-medium flex items-center justify-center transition-colors">
+              3
+            </button>
+<span class="text-xs text-neutral-400 px-1">...</span>
+<button class="w-8 h-8 rounded-lg border border-neutral-200 text-neutral-700 hover:bg-neutral-100 text-xs font-medium flex items-center justify-center transition-colors">
+              42
+            </button>
+<button class="w-8 h-8 rounded-lg border border-neutral-200 text-neutral-700 hover:bg-neutral-100 flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</nav>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Minimal KalaSetu Footer -->
+<footer class="w-full bg-white border-t border-neutral-200 py-12 px-4 sm:px-8 mt-auto">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-3">
+<img alt="KalaSetu Brand Logo" class="h-6 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XyZzJ-2AzacG95NxVHTtsNWLTn3MP7Hk7ymxKaXCbd2G8a1p5vHg4j2ujJmCoS4h0KX_HqmX86STeslNJ2XFswqQf-CXWbtUkQ1k1KobQkXTM6ZCoZ1ydLRj3xIIwrzvMelWuPEmyrun-rpjxDOHgtH7Xcae7PZRg-FgGZemdDHBM1Ss3xTgYFIA19Vu96nqUH7FSQCOySp-O1IJhZBMOL3Qh7VnEGMSmeQrcb0U6ikI2egRZi4x2gTEk"/>
+<span class="font-serif text-lg font-bold text-primary tracking-tight">KalaSetu</span>
+<span class="text-xs text-neutral-400 ml-2">© 2024 Ministry of Textiles &amp; ONDC Partner Network</span>
+</div>
+<div class="flex flex-wrap items-center gap-6 text-xs text-neutral-600">
+<a class="hover:text-primary transition-colors" href="#">Fair Wage Charter</a>
+<a class="hover:text-primary transition-colors" href="#">GI Registry Lookup</a>
+<a class="hover:text-primary transition-colors" href="#">Pehchan Artisan ID</a>
+<a class="hover:text-primary transition-colors" href="#">Support</a>
+</div>
+</div>
+</footer>
+<script>
+  // Mobile filter sidebar toggle
+  const sidebarBtn = document.getElementById('sidebarToggleBtn');
+  const sidebar = document.getElementById('sidebarFilter');
+  if (sidebarBtn && sidebar) {
+    sidebarBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('hidden');
+    });
+  }
+
+  // Wishlist heart toggle
+  document.querySelectorAll('button[aria-label="Add to Wishlist"]').forEach(button => {
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
+      const icon = this.querySelector('.material-symbols-outlined');
+      const isFilled = icon.getAttribute('style')?.includes("'FILL' 1");
+      if (isFilled) {
+        icon.removeAttribute('style');
+        this.classList.remove('text-primary');
+        this.classList.add('text-neutral-600');
+      } else {
+        icon.setAttribute('style', "font-variation-settings: 'FILL' 1;");
+        this.classList.remove('text-neutral-600');
+        this.classList.add('text-primary');
+      }
+    });
+  });
+</script>
+</body></html>
