@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KalaSetu (कला सेतु) — Authentic Handcrafted Indian Goods Direct from Master Artisans</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#9f3c16",
+              "primary-hover": "#862f0f",
+              "primary-light": "#fbf2ed",
+              "primary-container": "#bf542c",
+              secondary: "#4059aa",
+              tertiary: "#8d4b00",
+              surface: "#faf8f5",
+              "surface-card": "#ffffff",
+              "surface-container-low": "#f6f3ee",
+              "surface-container": "#f0ede9",
+              "surface-container-high": "#ebe8e3",
+              "surface-container-highest": "#e5e2dd",
+              "surface-container-lowest": "#ffffff",
+              "text-main": "#1e1e1a",
+              "text-muted": "#6b665f",
+              "border-subtle": "#ece7df",
+              outline: "#8a726a",
+              "outline-variant": "#dec0b7"
+            },
+            fontFamily: {
+              headline: ["Playfair Display", "serif"],
+              body: ["Plus Jakarta Sans", "sans-serif"],
+              sans: ["Plus Jakarta Sans", "sans-serif"],
+              serif: ["Playfair Display", "serif"]
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body { font-family: 'Plus Jakarta Sans', sans-serif; }
+      .font-serif-heading { font-family: 'Playfair Display', serif; }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+  </head>
+  <body class="bg-[#faf8f5] text-[#1e1e1a] antialiased min-h-screen flex flex-col selection:bg-primary/15 selection:text-primary">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

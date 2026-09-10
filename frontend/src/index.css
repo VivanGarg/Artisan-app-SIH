@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #9f3c16;
+  --secondary: #4059aa;
+  --tertiary: #8d4b00;
+  --surface: #faf8f5;
+  --card: #ffffff;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #faf8f5;
+  color: #1e1e1a;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f0ede9;
+}
+::-webkit-scrollbar-thumb {
+  background: #dec0b7;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9f3c16;
+}
+
+.font-serif-heading {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Ambient Terracotta Shadows per DESIGN.md */
+.shadow-terracotta {
+  box-shadow: 0 8px 24px -4px rgba(78, 42, 28, 0.08), 0 2px 6px -1px rgba(78, 42, 28, 0.04);
+}
+
+.shadow-modal {
+  box-shadow: 0 20px 48px -8px rgba(30, 26, 23, 0.16), 0 6px 16px -2px rgba(30, 26, 23, 0.08);
+}

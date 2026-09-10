@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">KalaSetu</string>
+    <string name="title_activity_main">KalaSetu</string>
+    <string name="package_name">in.gov.kalasetu.artisan</string>
+    <string name="custom_url_scheme">in.gov.kalasetu.artisan</string>
+</resources>

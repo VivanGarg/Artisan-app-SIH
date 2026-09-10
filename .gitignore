@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment
+.env
+**/.env
+.env.local
+
+# Build output
+dist/
+**/dist/
+build/
+**/build/
+
+# Temp & extracted assets
+stitch_mobile_extracted/
+*.zip
+*.log
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
