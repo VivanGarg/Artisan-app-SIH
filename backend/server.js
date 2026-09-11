@@ -8,6 +8,7 @@ const authRoutes = require("./src/routes/auth.routes");
 const productRoutes = require("./src/routes/product.routes");
 const artisanRoutes = require("./src/routes/artisan.routes");
 const orderRoutes = require("./src/routes/order.routes");
+const pricingRoutes = require("./src/routes/pricing.routes");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/artisans", artisanRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/pricing", pricingRoutes);
 
 const PORT = process.env.PORT || 5000;
 

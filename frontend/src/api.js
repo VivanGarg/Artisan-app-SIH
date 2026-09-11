@@ -85,5 +85,16 @@ export const api = {
     });
     if (!res.ok) throw new Error('Failed to fetch profile');
     return res.json();
+  },
+
+  // Price Recommendation (ML-powered dynamic pricing)
+  async getRecommendedPrice({ category, description, rating, brand }) {
+    const res = await fetch(`${API_BASE}/pricing/recommend`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ category, description, rating: rating || null, brand: brand || null })
+    });
+    if (!res.ok) throw new Error('Failed to get price recommendation');
+    return res.json();
   }
 };

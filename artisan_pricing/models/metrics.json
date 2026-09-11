@@ -1,0 +1,18 @@
+{
+  "low": {
+    "quantile": 0.1,
+    "MAE_rupees": 409.85,
+    "pinball_loss": 0.065
+  },
+  "suggested": {
+    "quantile": 0.5,
+    "MAE_rupees": 275.47,
+    "pinball_loss": 0.1582
+  },
+  "high": {
+    "quantile": 0.9,
+    "MAE_rupees": 504.3,
+    "pinball_loss": 0.0822
+  },
+  "band_consistency_pct": 100.0
+}

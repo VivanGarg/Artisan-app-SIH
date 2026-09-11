@@ -15,6 +15,11 @@ export const MobileArtisanTab = ({ onProductAdded, onSwitchToBuyer }) => {
   const [manualPrice, setManualPrice] = useState('');
   const [manualCluster, setManualCluster] = useState('Chanderi, MP');
 
+  // ML Price Recommendation state
+  const [priceBand, setPriceBand] = useState(null); // { low, suggested, high, category_used }
+  const [priceLoading, setPriceLoading] = useState(false);
+  const [priceError, setPriceError] = useState('');
+
   const handleVoiceRecord = () => {
     if (!isRecording) {
       setIsRecording(true);
@@ -128,6 +133,30 @@ export const MobileArtisanTab = ({ onProductAdded, onSwitchToBuyer }) => {
     }
   };
 
+  // ML-powered price suggestion
+  const handleGetPriceSuggestion = async () => {
+    if (!manualTitle && !manualCategory) return;
+    setPriceLoading(true);
+    setPriceError('');
+    setPriceBand(null);
+    try {
+      const result = await api.getRecommendedPrice({
+        category: manualCategory,
+        description: manualTitle || manualCategory,
+      });
+      if (result.success && result.data) {
+        setPriceBand(result.data);
+      } else {
+        setPriceError('Could not get price suggestion.');
+      }
+    } catch (err) {
+      console.error('Price suggestion failed:', err);
+      setPriceError('Pricing service unavailable. Make sure the ML server is running.');
+    } finally {
+      setPriceLoading(false);
+    }
+  };
+
   return (
     <div className="space-y-3.5 p-3.5 pb-8">
       {/* Voice Listing Studio Hero Card */}
@@ -201,42 +230,113 @@ export const MobileArtisanTab = ({ onProductAdded, onSwitchToBuyer }) => {
         <form onSubmit={handleManualSubmit} className="bg-white p-4 rounded-2xl border border-[#ece7df] shadow-xs space-y-3">
           <h4 className="font-serif text-xs font-bold uppercase tracking-wider text-[#1c1c19]">Manual Craft Registration</h4>
           <div>
-            <label className="block text-[10px] font-bold uppercase text-[#57423b] mb-1">Craft Title</label>
+            <label className="block text-[10px] font-bold uppercase text-[#57423b] mb-1">Craft Title / Description</label>
             <input
               required
               value={manualTitle}
               onChange={(e) => setManualTitle(e.target.value)}
-              placeholder="e.g. Pure Chanderi Katan Dupatta"
+              placeholder="e.g. Pure Chanderi Katan Silk Dupatta with Zari Border"
               className="w-full px-3 py-1.5 bg-[#faf7f2] border border-[#ece7df] rounded-xl text-xs"
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-2">
-            <div>
-              <label className="block text-[10px] font-bold uppercase text-[#57423b] mb-1">Category</label>
-              <select
-                value={manualCategory}
-                onChange={(e) => setManualCategory(e.target.value)}
-                className="w-full px-2 py-1.5 bg-[#faf7f2] border border-[#ece7df] rounded-xl text-xs"
-              >
-                <option value="Handloom Weaves">Handloom Weaves</option>
-                <option value="Pottery & Clay">Pottery &amp; Clay</option>
-                <option value="Dokra Metalcraft">Dokra Metalcraft</option>
-                <option value="Woodcraft & Inlay">Woodcraft &amp; Inlay</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-[10px] font-bold uppercase text-[#57423b] mb-1">Price (₹)</label>
-              <input
-                required
-                type="number"
-                value={manualPrice}
-                onChange={(e) => setManualPrice(e.target.value)}
-                placeholder="4200"
-                className="w-full px-3 py-1.5 bg-[#faf7f2] border border-[#ece7df] rounded-xl text-xs"
-              />
-            </div>
+          <div>
+            <label className="block text-[10px] font-bold uppercase text-[#57423b] mb-1">Category</label>
+            <select
+              value={manualCategory}
+              onChange={(e) => { setManualCategory(e.target.value); setPriceBand(null); }}
+              className="w-full px-2 py-1.5 bg-[#faf7f2] border border-[#ece7df] rounded-xl text-xs"
+            >
+              <option value="Handloom Weaves">Handloom Weaves</option>
+              <option value="Sarees">Sarees</option>
+              <option value="Pottery & Clay">Pottery &amp; Clay</option>
+              <option value="Dokra Metalcraft">Dokra Metalcraft</option>
+              <option value="Woodcraft & Inlay">Woodcraft &amp; Inlay</option>
+              <option value="Dress Material">Dress Material</option>
+              <option value="Footwear">Footwear</option>
+              <option value="Jewellery">Jewellery</option>
+            </select>
           </div>
+
+          {/* AI Price Suggestion Button */}
+          <button
+            type="button"
+            onClick={handleGetPriceSuggestion}
+            disabled={priceLoading || !manualTitle}
+            className={`w-full py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer border ${
+              priceLoading
+                ? 'bg-amber-50 border-amber-200 text-amber-700'
+                : 'bg-gradient-to-r from-violet-50 to-blue-50 border-violet-200 text-violet-800 hover:border-violet-400'
+            } disabled:opacity-40 disabled:cursor-not-allowed`}
+          >
+            <span className="material-symbols-outlined text-[16px]">
+              {priceLoading ? 'hourglass_top' : 'auto_awesome'}
+            </span>
+            <span>{priceLoading ? 'Getting AI fair-price...' : '✨ Get AI Price Suggestion'}</span>
+          </button>
+
+          {/* Price Suggestion Result Card */}
+          {priceBand && (
+            <div className="p-3 rounded-xl bg-gradient-to-br from-violet-50 to-blue-50 border border-violet-200 space-y-2 animate-in fade-in">
+              <div className="flex items-center gap-1.5 text-[11px] font-bold text-violet-800">
+                <span className="material-symbols-outlined text-[15px]">smart_toy</span>
+                <span>AI Fair-Price Recommendation</span>
+              </div>
+              <div className="grid grid-cols-3 gap-1.5 text-center">
+                <div className="p-2 rounded-lg bg-white/70 border border-violet-100">
+                  <div className="text-[9px] uppercase font-bold text-[#57423b]">Floor</div>
+                  <div className="font-serif text-sm font-bold text-orange-700">₹{Math.round(priceBand.low)}</div>
+                </div>
+                <div className="p-2 rounded-lg bg-white border-2 border-emerald-300 shadow-sm">
+                  <div className="text-[9px] uppercase font-bold text-emerald-700">Suggested</div>
+                  <div className="font-serif text-base font-bold text-emerald-800">₹{Math.round(priceBand.suggested)}</div>
+                </div>
+                <div className="p-2 rounded-lg bg-white/70 border border-violet-100">
+                  <div className="text-[9px] uppercase font-bold text-[#57423b]">Premium</div>
+                  <div className="font-serif text-sm font-bold text-blue-700">₹{Math.round(priceBand.high)}</div>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setManualPrice(String(Math.round(priceBand.suggested)))}
+                className="w-full py-1.5 rounded-lg bg-emerald-600 text-white text-[11px] font-bold cursor-pointer hover:bg-emerald-700 transition-colors"
+              >
+                Use Suggested Price (₹{Math.round(priceBand.suggested)})
+              </button>
+              <p className="text-[10px] text-violet-600 text-center leading-snug">
+                Based on market comparables for "{priceBand.category_used}" crafts
+              </p>
+            </div>
+          )}
+
+          {priceError && (
+            <div className="p-2 rounded-lg bg-rose-50 border border-rose-200 text-[11px] text-rose-700 flex items-center gap-1">
+              <span className="material-symbols-outlined text-[14px]">error</span>
+              <span>{priceError}</span>
+            </div>
+          )}
+
+          <div>
+            <label className="block text-[10px] font-bold uppercase text-[#57423b] mb-1">Your Price (₹)</label>
+            <input
+              required
+              type="number"
+              value={manualPrice}
+              onChange={(e) => setManualPrice(e.target.value)}
+              placeholder="Enter price or use AI suggestion above"
+              className="w-full px-3 py-1.5 bg-[#faf7f2] border border-[#ece7df] rounded-xl text-xs"
+            />
+          </div>
+
+          {/* Underpricing Warning */}
+          {priceBand && manualPrice && Number(manualPrice) < priceBand.low && (
+            <div className="p-2 rounded-lg bg-amber-50 border border-amber-200 text-[11px] text-amber-800 flex items-start gap-1.5">
+              <span className="material-symbols-outlined text-[14px] mt-0.5">warning</span>
+              <span>
+                <strong>You may be underpricing.</strong> Similar crafts sell for at least ₹{Math.round(priceBand.low)}. Consider raising your price to ensure fair wages.
+              </span>
+            </div>
+          )}
 
           <button
             type="submit"
