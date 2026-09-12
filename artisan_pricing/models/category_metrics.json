@@ -1,0 +1,7 @@
+{
+  "top1_accuracy": 0.9922,
+  "top3_accuracy": 0.9983,
+  "n_categories": 88,
+  "n_train": 159437,
+  "min_samples_per_category": 150
+}
