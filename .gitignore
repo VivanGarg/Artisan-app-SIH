@@ -1,6 +1,9 @@
 # Dependencies
 node_modules/
 **/node_modules/
+__pycache__/
+**/__pycache__/
+*.pyc
 .venv/
 **/.venv/
 
@@ -25,3 +28,10 @@ stitch_mobile_extracted/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Secrets & credentials - never commit these
+*.pem
+*.key
+*.p12
+*.keystore
+credentials*.txt
