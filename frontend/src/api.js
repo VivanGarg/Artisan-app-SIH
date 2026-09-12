@@ -1,6 +1,32 @@
-const API_BASE = '/api';
+import { Capacitor } from '@capacitor/core';
+
+// Where the backend lives.
+//
+// Browser dev (`npm run dev`): leave VITE_API_BASE unset. '/api' is relative to
+// the Vite dev server, which proxies it to localhost:5000 (see vite.config.js).
+//
+// Android build: the packaged app has no dev server and no proxy, so a relative
+// '/api' resolves against the WebView's own origin (https://localhost) and every
+// request fails. Set VITE_API_BASE in frontend/.env to the backend's address as
+// reachable *from the phone* - your machine's LAN IP, not localhost - then
+// rebuild with `npm run cap:build`. See frontend/.env.example.
+const API_BASE = import.meta.env.VITE_API_BASE || '/api';
+
+if (Capacitor.isNativePlatform() && !import.meta.env.VITE_API_BASE) {
+  console.warn(
+    '[api] VITE_API_BASE is not set, so API calls will fail on device. ' +
+    'Set it in frontend/.env and re-run `npm run cap:build`.'
+  );
+}
 
 export const api = {
+  // Connectivity probe - useful for diagnosing device -> backend reachability.
+  async checkHealth() {
+    const res = await fetch(`${API_BASE}/health`);
+    if (!res.ok) throw new Error(`Backend unreachable (HTTP ${res.status})`);
+    return res.json();
+  },
+
   // Products
   async getProducts(params = {}) {
     const query = new URLSearchParams();
