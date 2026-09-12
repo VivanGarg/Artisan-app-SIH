@@ -105,6 +105,17 @@ export const api = {
     return data;
   },
 
+  async googleAuth(profile) {
+    const res = await fetch(`${API_BASE}/auth/google`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(profile)
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Google authentication failed');
+    return data;
+  },
+
   async getProfile(token) {
     const res = await fetch(`${API_BASE}/auth/profile`, {
       headers: { Authorization: `Bearer ${token}` }

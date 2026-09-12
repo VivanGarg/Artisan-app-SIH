@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { MobileHeader } from './components/MobileHeader';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { MobileOnboarding } from './pages/MobileOnboarding';
+import { GoogleAuthScreen } from './components/mobile/GoogleAuthScreen';
 import { MobileHomeTab } from './components/mobile/MobileHomeTab';
 import { MobileCatalogTab } from './components/mobile/MobileCatalogTab';
 import { MobileCartTab } from './components/mobile/MobileCartTab';
@@ -14,12 +15,22 @@ import { MobileProductSheet } from './components/mobile/MobileProductSheet';
 import { api } from './api';
 
 function MobileKalaSetuApp() {
+  const { user, isAuthenticated } = useAuth();
+  
   // App navigation state
   const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState(() => {
     return localStorage.getItem('kalasetu_mobile_onboarded') === 'true';
   });
-  const [appMode, setAppMode] = useState('buyer'); // 'buyer' or 'artisan'
-  const [activeTab, setActiveTab] = useState('home'); // 'home', 'catalog', 'cart', 'orders', 'checkout', 'studio', 'voice'
+  const [showAuthScreen, setShowAuthScreen] = useState(() => {
+    return !localStorage.getItem('kalasetu_mobile_onboarded');
+  });
+  const [appMode, setAppMode] = useState(() => {
+    return localStorage.getItem('kalasetu_role') || 'buyer';
+  }); // 'buyer' or 'artisan'
+  const [activeTab, setActiveTab] = useState(() => {
+    const savedRole = localStorage.getItem('kalasetu_role');
+    return savedRole === 'artisan' ? 'studio' : 'home';
+  });
   const [currentLang, setCurrentLang] = useState('en');
 
   const [products, setProducts] = useState([]);
@@ -27,6 +38,14 @@ function MobileKalaSetuApp() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('All Crafts');
   const [loading, setLoading] = useState(true);
+
+  // Sync user role if authenticated user role changes
+  useEffect(() => {
+    if (user?.role && (user.role === 'buyer' || user.role === 'artisan')) {
+      setAppMode(user.role);
+      localStorage.setItem('kalasetu_role', user.role);
+    }
+  }, [user]);
 
   // Load initial catalog and artisans from backend API
   useEffect(() => {
@@ -47,20 +66,31 @@ function MobileKalaSetuApp() {
     loadData();
   }, []);
 
-  const handleOnboardingProceed = ({ role, lang }) => {
-    setAppMode(role);
-    setCurrentLang(lang);
+  const handleAuthSuccess = ({ role, user: loggedUser }) => {
+    const effectiveRole = role || loggedUser?.role || 'buyer';
+    setAppMode(effectiveRole);
+    setHasCompletedOnboarding(true);
+    setShowAuthScreen(false);
+    localStorage.setItem('kalasetu_mobile_onboarded', 'true');
+    localStorage.setItem('kalasetu_role', effectiveRole);
+    setActiveTab(effectiveRole === 'artisan' ? 'studio' : 'home');
+  };
+
+  const handleAuthSkip = () => {
+    setShowAuthScreen(false);
     setHasCompletedOnboarding(true);
     localStorage.setItem('kalasetu_mobile_onboarded', 'true');
-    setActiveTab(role === 'artisan' ? 'studio' : 'home');
+    setActiveTab(appMode === 'artisan' ? 'studio' : 'home');
   };
 
   const handleSwitchMode = () => {
     if (appMode === 'buyer') {
       setAppMode('artisan');
+      localStorage.setItem('kalasetu_role', 'artisan');
       setActiveTab('studio');
     } else {
       setAppMode('buyer');
+      localStorage.setItem('kalasetu_role', 'buyer');
       setActiveTab('home');
     }
   };
@@ -79,9 +109,13 @@ function MobileKalaSetuApp() {
       {/* Mobile Application Container */}
       <div className="w-full max-w-[440px] min-h-screen sm:min-h-[850px] sm:max-h-[92vh] bg-[#faf7f2] sm:rounded-[36px] sm:shadow-2xl sm:border-[8px] sm:border-neutral-800 flex flex-col justify-between overflow-hidden relative">
         
-        {/* Onboarding Screen (First-time launch or language change) */}
-        {!hasCompletedOnboarding ? (
-          <MobileOnboarding onProceed={handleOnboardingProceed} />
+        {/* Google Auth Screen (Initial Launch or when opened from Header) */}
+        {showAuthScreen ? (
+          <GoogleAuthScreen
+            onLoginSuccess={handleAuthSuccess}
+            onSkip={handleAuthSkip}
+            currentLang={currentLang}
+          />
         ) : (
           <>
             {/* Native Mobile App Header */}
@@ -90,7 +124,7 @@ function MobileKalaSetuApp() {
               lang={currentLang}
               onSelectLang={(l) => setCurrentLang(l)}
               onSwitchMode={handleSwitchMode}
-              onOpenAuth={() => {}}
+              onOpenAuth={() => setShowAuthScreen(true)}
             />
 
             {/* Scrollable Screen Content */}

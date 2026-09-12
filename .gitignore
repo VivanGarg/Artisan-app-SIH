@@ -17,11 +17,15 @@ dist/
 **/dist/
 build/
 **/build/
+*.apk
+**/*.apk
 
 # Temp & extracted assets
 stitch_mobile_extracted/
 *.zip
 *.log
+phone_*.png
+phone_screen.png
 
 # IDE & OS
 .vscode/

@@ -55,6 +55,29 @@ export const AuthProvider = ({ children }) => {
     return res;
   };
 
+  const loginWithGoogle = async (profile) => {
+    const res = await api.googleAuth(profile);
+    if (res.token) {
+      setToken(res.token);
+      if (res.user) {
+        setUser(res.user);
+        localStorage.setItem('kalasetu_user', JSON.stringify(res.user));
+      }
+      setAuthModalOpen(false);
+      return res;
+    }
+    throw new Error('No token returned from Google authentication');
+  };
+
+  const switchRole = (newRole) => {
+    if (user) {
+      const updated = { ...user, role: newRole };
+      setUser(updated);
+      localStorage.setItem('kalasetu_user', JSON.stringify(updated));
+    }
+    setAuthRole(newRole);
+  };
+
   const logout = () => {
     setToken('');
     setUser(null);
@@ -74,6 +97,8 @@ export const AuthProvider = ({ children }) => {
         setAuthRole,
         login,
         register,
+        loginWithGoogle,
+        switchRole,
         logout
       }}
     >

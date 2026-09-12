@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { translations } from '../data/translations';
+import { useAuth } from '../context/AuthContext';
 
 export const MobileHeader = ({ mode, lang, onSelectLang, onSwitchMode, onOpenAuth }) => {
+  const { user, isAuthenticated, logout } = useAuth();
   const [langMenuOpen, setLangMenuOpen] = useState(false);
+  const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
 
   const t = translations[lang] || translations.en;
@@ -119,16 +122,103 @@ export const MobileHeader = ({ mode, lang, onSelectLang, onSwitchMode, onOpenAut
           {/* Quick Switch Mode Pill */}
           <button
             onClick={onSwitchMode}
-            className={`px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all shadow-xs flex items-center gap-1 cursor-pointer ${
+            className={`px-2 py-1 rounded-lg text-[10px] font-bold border transition-all shadow-xs flex items-center gap-1 cursor-pointer ${
               mode === 'artisan'
                 ? 'bg-primary text-white border-primary hover:bg-[#862f0f]'
                 : 'bg-secondary text-white border-secondary hover:bg-secondary/90'
             }`}
             title="Switch between Buyer and Artisan interfaces"
           >
-            <span className="material-symbols-outlined text-[13px]">sync_alt</span>
-            <span>{mode === 'artisan' ? 'Buyer Mode' : 'Karigar Studio'}</span>
+            <span className="material-symbols-outlined text-[12px]">sync_alt</span>
+            <span>{mode === 'artisan' ? 'Buyer' : 'Studio'}</span>
           </button>
+
+          {/* User Profile / Auth Button */}
+          <div className="relative">
+            {isAuthenticated && user ? (
+              <button
+                onClick={() => setAccountMenuOpen(!accountMenuOpen)}
+                className="w-7 h-7 rounded-full overflow-hidden border border-[#dadce0] hover:ring-2 hover:ring-primary/40 transition-all cursor-pointer flex items-center justify-center bg-primary-light text-primary font-bold text-xs"
+                type="button"
+                title={user.name || 'Account'}
+              >
+                {user.picture ? (
+                  <img src={user.picture} alt={user.name} className="w-full h-full object-cover" />
+                ) : (
+                  <span>{(user.name || 'U').charAt(0).toUpperCase()}</span>
+                )}
+              </button>
+            ) : (
+              <button
+                onClick={onOpenAuth}
+                className="p-1 rounded-lg bg-neutral-50 hover:bg-neutral-100 border border-[#ece7df] text-[#1c1c19] cursor-pointer flex items-center justify-center"
+                type="button"
+                title="Google Sign In"
+              >
+                <span className="material-symbols-outlined text-[18px] text-primary">account_circle</span>
+              </button>
+            )}
+
+            {/* Account Popover Menu */}
+            {accountMenuOpen && (
+              <div className="absolute right-0 top-9 z-50 bg-white border border-[#ece7df] rounded-2xl shadow-2xl p-3 w-56 space-y-2.5 animate-in fade-in zoom-in-95 duration-150">
+                <div className="flex items-center gap-2.5 pb-2 border-b border-[#f0ede8]">
+                  <div className="w-8 h-8 rounded-full overflow-hidden bg-primary/10 flex items-center justify-center shrink-0">
+                    {user?.picture ? (
+                      <img src={user.picture} alt={user.name} className="w-full h-full object-cover" />
+                    ) : (
+                      <span className="font-bold text-primary text-xs">{(user?.name || 'U').charAt(0)}</span>
+                    )}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="text-xs font-bold text-[#1c1c19] truncate">{user?.name}</div>
+                    <div className="text-[10px] text-[#57423b] truncate">{user?.email}</div>
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <div className="flex items-center justify-between text-[10px] px-1">
+                    <span className="text-neutral-500 font-medium">Current Role:</span>
+                    <span className={`font-bold px-1.5 py-0.2 rounded-full capitalize ${
+                      mode === 'artisan' ? 'bg-blue-100 text-secondary' : 'bg-primary-light text-primary'
+                    }`}>
+                      {mode === 'artisan' ? 'Artisan / Karigar' : 'Buyer / Patron'}
+                    </span>
+                  </div>
+                  {user?.pehchanId && (
+                    <div className="flex items-center justify-between text-[10px] px-1">
+                      <span className="text-neutral-500 font-medium">Pehchan ID:</span>
+                      <span className="font-mono font-bold text-emerald-800">{user.pehchanId}</span>
+                    </div>
+                  )}
+                </div>
+
+                <div className="pt-2 border-t border-[#f0ede8] space-y-1">
+                  <button
+                    onClick={() => {
+                      onSwitchMode();
+                      setAccountMenuOpen(false);
+                    }}
+                    className="w-full py-1.5 px-2 text-left text-xs font-semibold rounded-lg hover:bg-neutral-50 text-[#1c1c19] flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <span className="material-symbols-outlined text-[16px] text-tertiary">swap_horiz</span>
+                    <span>Switch to {mode === 'artisan' ? 'Buyer Mode' : 'Karigar Studio'}</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      logout();
+                      setAccountMenuOpen(false);
+                    }}
+                    className="w-full py-1.5 px-2 text-left text-xs font-semibold rounded-lg hover:bg-red-50 text-red-600 flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <span className="material-symbols-outlined text-[16px]">logout</span>
+                    <span>Sign Out</span>
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </header>

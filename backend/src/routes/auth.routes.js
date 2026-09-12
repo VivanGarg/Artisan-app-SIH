@@ -170,6 +170,96 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// Google Authentication Endpoint
+router.post("/google", async (req, res) => {
+  try {
+    const { email, name, picture, role, pehchanId, googleId } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ success: false, message: "Email is required for Google authentication" });
+    }
+
+    const cleanEmail = email.toLowerCase().trim();
+    const chosenRole = role === "artisan" ? "artisan" : "buyer";
+    let user = null;
+
+    if (isConnected()) {
+      try {
+        user = await User.findOne({ email: cleanEmail });
+      } catch {
+        user = localUsers.get(cleanEmail);
+      }
+    } else {
+      user = localUsers.get(cleanEmail);
+    }
+
+    if (!user) {
+      // Create new user from Google profile
+      const userId = `usr-google-${Date.now()}`;
+      user = {
+        _id: userId,
+        name: name || (chosenRole === "artisan" ? "Artisan Partner" : "Craft Patron"),
+        email: cleanEmail,
+        role: chosenRole,
+        picture: picture || null,
+        googleId: googleId || `gid-${Date.now()}`,
+        pehchanId: chosenRole === "artisan" ? (pehchanId || `GI-${Math.floor(1000 + Math.random() * 9000)}`) : undefined,
+        createdAt: new Date()
+      };
+
+      localUsers.set(cleanEmail, user);
+
+      if (isConnected()) {
+        try {
+          await User.create(user);
+        } catch (e) {
+          console.warn("DB google user save note:", e.message);
+        }
+      }
+    } else {
+      // Update role / picture if specified
+      if (role && user.role !== role) {
+        user.role = role;
+      }
+      if (picture) user.picture = picture;
+      if (name && !user.name) user.name = name;
+      localUsers.set(cleanEmail, user);
+    }
+
+    const token = jwt.sign(
+      {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        picture: user.picture
+      },
+      JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    res.json({
+      success: true,
+      message: "Google authentication successful",
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        picture: user.picture,
+        pehchanId: user.pehchanId
+      }
+    });
+  } catch (error) {
+    console.error("Google Auth error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Google authentication failed: " + error.message
+    });
+  }
+});
+
 router.get("/profile", protect, (req, res) => {
   res.json({
     success: true,
