@@ -7,6 +7,10 @@ fastapi>=0.100
 uvicorn>=0.23
 pydantic>=2.0
 
-# optional, faster/more accurate quantile boosting - code auto-detects and uses it if installed
+# REQUIRED, not optional: the committed models/quantile_models.joblib was trained
+# with the XGBoost backend, so unpickling it fails with ModuleNotFoundError
+# without this installed. (README's "sklearn backend" note is out of date.)
 xgboost>=2.0
-shap>=0.44
+
+# optional - only needed for SHAP explainability work
+# shap>=0.44
