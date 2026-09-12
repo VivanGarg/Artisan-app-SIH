@@ -14,3 +14,8 @@ xgboost>=2.0
 
 # optional - only needed for SHAP explainability work
 # shap>=0.44
+
+# Image enhancer (src/image_enhance.py). Headless OpenCV: no GUI bindings
+# needed on a server, and it avoids pulling in Qt.
+opencv-python-headless>=4.8
+pillow>=10.0

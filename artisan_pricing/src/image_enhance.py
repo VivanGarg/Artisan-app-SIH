@@ -26,6 +26,7 @@ from PIL import Image, ImageOps
 MAX_EDGE = 2048          # cap work size; phone photos are far larger than needed
 OUTPUT_EDGE = 1200       # square output, comfortably above marketplace minimums
 SUBJECT_MARGIN = 0.06    # breathing room around the subject in the final frame
+SEGMENT_EDGE = 512       # resolution GrabCut actually runs at (see _segment)
 
 
 @dataclass
@@ -63,14 +64,22 @@ def _brightness(bgr: np.ndarray) -> float:
     return float(cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY).mean())
 
 
-def _white_balance(bgr: np.ndarray) -> np.ndarray:
-    """Gray-world correction. Indoor rural light carries a heavy yellow cast."""
+def _white_balance(bgr: np.ndarray, strength: float = 0.55) -> np.ndarray:
+    """
+    Damped gray-world correction. Indoor rural light carries a heavy yellow
+    cast, but full gray-world assumes the scene averages to neutral - false for
+    a product photo where one saturated textile fills the frame. Applied at
+    full strength it turned a maroon saree purple, which for a craft
+    marketplace is worse than the cast it removed. We correct partway: enough
+    to kill the cast, not enough to rewrite the fabric's colour.
+    """
     result = bgr.astype(np.float32)
     means = [result[:, :, c].mean() for c in range(3)]
     gray = float(np.mean(means))
     for c in range(3):
         if means[c] > 1e-5:
-            result[:, :, c] *= gray / means[c]
+            gain = gray / means[c]
+            result[:, :, c] *= 1.0 + strength * (gain - 1.0)
     return np.clip(result, 0, 255).astype(np.uint8)
 
 
@@ -92,29 +101,76 @@ def _segment(bgr: np.ndarray):
     photo, so we leave the original background alone instead.
     """
     warnings = []
-    h, w = bgr.shape[:2]
+    full_h, full_w = bgr.shape[:2]
+
+    # Segment at low resolution, then scale the mask back up.
+    #
+    # GrabCut cost is linear in pixel count: a 0.6 MP test image took 13s, so a
+    # real 3 MP phone photo would take about a minute and blow the request
+    # timeout. Object boundaries do not need megapixels to locate - we feather
+    # the mask edge afterwards anyway - so running it on a ~0.26 MP copy gives
+    # the same silhouette roughly 12x faster.
+    scale = min(1.0, SEGMENT_EDGE / max(full_h, full_w))
+    small = (cv2.resize(bgr, (int(full_w * scale), int(full_h * scale)),
+                        interpolation=cv2.INTER_AREA) if scale < 1.0 else bgr)
+
+    h, w = small.shape[:2]
     inset_x, inset_y = int(w * 0.06), int(h * 0.06)
     rect = (inset_x, inset_y, w - 2 * inset_x, h - 2 * inset_y)
 
     mask = np.zeros((h, w), np.uint8)
     bgd, fgd = np.zeros((1, 65), np.float64), np.zeros((1, 65), np.float64)
     try:
-        cv2.grabCut(bgr, mask, rect, bgd, fgd, 5, cv2.GC_INIT_WITH_RECT)
+        cv2.grabCut(small, mask, rect, bgd, fgd, 5, cv2.GC_INIT_WITH_RECT)
     except cv2.error as e:
         return None, 0.0, ["segmentation failed: " + str(e)]
 
     binary = np.where((mask == cv2.GC_FGD) | (mask == cv2.GC_PR_FGD), 255, 0).astype(np.uint8)
 
-    # Close holes (zari gaps, open embroidery), then keep only the largest blob
-    # so stray background patches don't survive into the composite.
-    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (9, 9))
-    binary = cv2.morphologyEx(binary, cv2.MORPH_CLOSE, kernel, iterations=2)
-    binary = cv2.morphologyEx(binary, cv2.MORPH_OPEN, kernel, iterations=1)
+    # Order matters here, and getting it wrong is visible in the output.
+    #
+    # Opening FIRST severs the thin bridges that GrabCut leaves between the
+    # subject and adjacent background clutter, and removes speckle. Only then
+    # do we pick the largest component. Closing first (the intuitive order)
+    # dilates across those gaps and fuses nearby objects onto the subject, so
+    # "largest component" then includes whatever was lying next to the piece -
+    # in testing, three background squares rode along into the final image.
+    open_k = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (9, 9))
+    binary = cv2.morphologyEx(binary, cv2.MORPH_OPEN, open_k, iterations=1)
 
-    n, labels, stats, _ = cv2.connectedComponentsWithStats(binary, connectivity=8)
+    # Isolate the subject by its CORE, not by raw connectivity.
+    #
+    # Clutter lying against the piece - a spool, a tile edge, another folded
+    # textile - touches it in the mask, so plain "largest connected component"
+    # drags it along. Eroding hard first dissolves small objects entirely and
+    # cuts the narrow contact between the subject and anything leaning on it;
+    # the surviving core is the piece itself. Dilating that core back and
+    # intersecting with the original mask restores the true silhouette.
+    #
+    # Done on shape alone, deliberately: a colour-similarity filter would be
+    # simpler but would strip a contrasting zari border off a saree body, and
+    # on this marketplace the border is often the most valuable part.
+    erode_k = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (15, 15))
+    core = cv2.erode(binary, erode_k, iterations=1)
+
+    n, labels, stats, _ = cv2.connectedComponentsWithStats(core, connectivity=8)
     if n > 1:
         largest = 1 + int(np.argmax(stats[1:, cv2.CC_STAT_AREA]))
-        binary = np.where(labels == largest, 255, 0).astype(np.uint8)
+        core = np.where(labels == largest, 255, 0).astype(np.uint8)
+        grown = cv2.dilate(core, erode_k, iterations=1)
+        binary = cv2.bitwise_and(binary, grown)
+    else:
+        # Erosion consumed everything - a thin piece such as a stole. Fall back
+        # to plain largest-component so we still return something usable.
+        n, labels, stats, _ = cv2.connectedComponentsWithStats(binary, connectivity=8)
+        if n > 1:
+            largest = 1 + int(np.argmax(stats[1:, cv2.CC_STAT_AREA]))
+            binary = np.where(labels == largest, 255, 0).astype(np.uint8)
+
+    # Now that only the subject remains, close interior holes (zari gaps, open
+    # weave, embroidery) without any risk of re-attaching the background.
+    close_k = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7))
+    binary = cv2.morphologyEx(binary, cv2.MORPH_CLOSE, close_k, iterations=2)
 
     coverage = float((binary > 0).sum()) / (h * w)
     if coverage < 0.05:
@@ -124,8 +180,12 @@ def _segment(bgr: np.ndarray):
         warnings.append("could not separate subject from background - kept original background")
         return None, coverage, warnings
 
-    # Feather the edge so the composite doesn't look cut out with scissors.
-    binary = cv2.GaussianBlur(binary, (5, 5), 0)
+    # Back to full resolution for compositing, then feather so the composite
+    # doesn't look cut out with scissors. Upscaling a binary mask and blurring
+    # it also hides the low-res stair-stepping.
+    if binary.shape[:2] != (full_h, full_w):
+        binary = cv2.resize(binary, (full_w, full_h), interpolation=cv2.INTER_LINEAR)
+    binary = cv2.GaussianBlur(binary, (9, 9), 0)
     return binary, coverage, warnings
 
 
