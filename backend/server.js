@@ -9,12 +9,15 @@ const productRoutes = require("./src/routes/product.routes");
 const artisanRoutes = require("./src/routes/artisan.routes");
 const orderRoutes = require("./src/routes/order.routes");
 const pricingRoutes = require("./src/routes/pricing.routes");
+const mlRoutes = require("./src/routes/ml.routes");
 
 const app = express();
 
 // Middleware
 app.use(cors({ origin: true, credentials: true }));
-app.use(express.json());
+// Artisan photos arrive as base64 in the JSON body, so the default 100kb
+// limit would reject every upload with a 413.
+app.use(express.json({ limit: "15mb" }));
 
 // Routes
 app.use("/api/auth", authRoutes);
@@ -22,6 +25,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/artisans", artisanRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/pricing", pricingRoutes);
+app.use("/api/ml", mlRoutes);
 
 const PORT = process.env.PORT || 5000;
 

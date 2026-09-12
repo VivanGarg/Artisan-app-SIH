@@ -133,5 +133,52 @@ export const api = {
     });
     if (!res.ok) throw new Error('Failed to get price recommendation');
     return res.json();
+  },
+
+  // --- AI cataloging -------------------------------------------------------
+
+  // Spoken transcript (Hindi, English or a mix) -> title, description,
+  // bullets, SEO keywords and a category.
+  async catalogFromVoice({ transcript, category }) {
+    const res = await fetch(`${API_BASE}/ml/catalog`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ transcript, category: category || null })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Could not build the listing');
+    return data.data;
+  },
+
+  // Phone photo -> listing-grade image on a clean background.
+  // `imageBase64` may be a bare base64 string or a full data: URI.
+  async enhanceImage({ imageBase64, removeBackground = true }) {
+    const res = await fetch(`${API_BASE}/ml/enhance-image`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ image_base64: imageBase64, remove_background: removeBackground })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Could not enhance the photo');
+    return data.data;
+  },
+
+  // The whole artisan flow in one call: speak, optionally attach a photo, get
+  // back a complete draft listing (copy + category + price band + image).
+  // Individual stages degrade independently - check `warnings` in the result.
+  async draftListing({ transcript, imageBase64, category, removeBackground = true }) {
+    const res = await fetch(`${API_BASE}/ml/listing/draft`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        transcript,
+        image_base64: imageBase64 || null,
+        category: category || null,
+        remove_background: removeBackground
+      })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Could not draft the listing');
+    return data.data;
   }
 };
