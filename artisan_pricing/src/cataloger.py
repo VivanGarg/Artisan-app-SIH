@@ -121,6 +121,44 @@ COLOURS = {
     "indigo": "indigo", "नील": "indigo", "beige": "beige", "cream": "cream", "grey": "grey",
 }
 
+# Canonical product -> the marketplace category the pricing model was trained
+# on. This mapping is the PRIMARY category signal, not the classifier.
+#
+# Why: the classifier is trained on general Indian e-commerce text and, however
+# good its held-out score looks, it does not know craft vocabulary. Measured on
+# real artisan phrasing it returned "Jewellery" at confidence 1.0 for a Chanderi
+# saree and "Beauty and Personal Care" for a bamboo basket. A weaver who says
+# "saree" has told us the category outright - there is no reason to let a model
+# overrule that. The classifier now only runs when the lexicon finds no product.
+PRODUCT_CATEGORY = {
+    "saree": "Sarees",
+    "dupatta": "Dupattas",
+    "chunni": "Dupattas",
+    "kurta": "Kurtas",
+    "kurti": "Kurtis & Tunics",
+    "lehenga": "Lehenga Choli Sets",
+    "shawl": "Shawls & Wraps",
+    "stole": "Shawls & Wraps",
+    "scarf": "Shawls & Wraps",
+    "bedsheet": "Home Furnishing",
+    "rug": "Home Furnishing",
+    "carpet": "Home Furnishing",
+    "cushion cover": "Home Furnishing",
+    "towel": "Home Furnishing",
+    "napkin": "Home Furnishing",
+    "pot": "Home Decor & Festive Needs",
+    "vase": "Home Decor & Festive Needs",
+    "idol": "Home Decor & Festive Needs",
+    "sculpture": "Home Decor & Festive Needs",
+    "basket": "Home Decor & Festive Needs",
+    "jewellery": "Jewellery",
+    "bangles": "Jewellery",
+    "bag": "Bags, Wallets & Belts",
+}
+
+# Below this the classifier is treated as "no opinion" rather than an answer.
+MODEL_CONFIDENCE_FLOOR = 0.45
+
 # Ordered so longer, more specific phrases match before their substrings.
 _LEXICONS = [
     ("technique", TECHNIQUES),
@@ -294,7 +332,27 @@ class Cataloger:
         )
         predictions = self.predict_category(f"{transcript} {canonical}".strip())
 
-        chosen = category or (predictions[0]["category"] if predictions else None)
+        # Resolution order: what the artisan said > what the lexicon recognised
+        # > what the model guesses, and only if it is actually confident.
+        lexicon_category = next(
+            (PRODUCT_CATEGORY[p] for p in attrs["product"] if p in PRODUCT_CATEGORY),
+            None,
+        )
+        model_category = (
+            predictions[0]["category"]
+            if predictions and predictions[0]["confidence"] >= MODEL_CONFIDENCE_FLOOR
+            else None
+        )
+
+        if category:
+            chosen, source = category, "artisan"
+        elif lexicon_category:
+            chosen, source = lexicon_category, "lexicon"
+        elif model_category:
+            chosen, source = model_category, "model"
+        else:
+            chosen, source = None, "unresolved"
+
         title = self._title(attrs)
 
         return {
@@ -305,7 +363,8 @@ class Cataloger:
             "attributes": {k: v for k, v in attrs.items() if k != "unrecognised_terms"},
             "category": chosen,
             "category_predictions": predictions,
-            "category_source": "artisan" if category else "predicted",
+            "category_source": source,
+            "needs_confirmation": source in ("model", "unresolved"),
             "unrecognised_terms": attrs["unrecognised_terms"],
             "transcript": transcript,
         }

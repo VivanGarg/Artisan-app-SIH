@@ -30,6 +30,15 @@ MODEL_DIR = os.path.join(HERE, "..", "models")
 # drag down precision on the categories that actually matter.
 MIN_SAMPLES = 150
 
+# Spoken product descriptions are short. Train on the same shape of input.
+SPEECH_WORDS = 12
+
+# Keep the vocabulary small on purpose. This model is only a FALLBACK - the
+# craft lexicon in cataloger.py handles anything with recognisable craft
+# vocabulary - so a 120k-feature model was 63 MB of git history for a component
+# that rarely decides anything. 25k features keeps it a few MB.
+MAX_FEATURES = 25_000
+
 
 def main():
     df = pd.read_csv(DATA)
@@ -38,6 +47,24 @@ def main():
 
     # Drop malformed category labels left over from the raw scrapes.
     df = df[~df["category"].str.contains(r'^[\["\']', regex=True, na=False)]
+
+    # Bare numeric codes aren't usable labels either.
+    df = df[~df["category"].str.fullmatch(r"\d+", na=False)]
+
+    # Train on the FIRST FEW WORDS only.
+    #
+    # This matters more than any hyperparameter here. The corpus is long
+    # e-commerce prose, but at inference we get a spoken sentence such as
+    # "hathkargha resham ki saree". Trained on full descriptions the model
+    # scored 0.992 on a held-out split of that same prose and then predicted
+    # "Jewellery" with confidence 1.0 for a Chanderi saree - a perfect score on
+    # a distribution it will never see in production. Truncating aligns
+    # training with how the model is actually used, and the honest accuracy
+    # that falls out is far more useful than the flattering one.
+    df["description_clean"] = (
+        df["description_clean"].str.split().str[:SPEECH_WORDS].str.join(" ")
+    )
+    df = df[df["description_clean"].str.len() > 8]
 
     counts = df["category"].value_counts()
     keep = counts[counts >= MIN_SAMPLES].index
@@ -57,7 +84,7 @@ def main():
     # classes costs minutes we do not need to spend.
     pipe = Pipeline([
         ("tfidf", TfidfVectorizer(
-            ngram_range=(1, 2), min_df=3, max_features=120_000,
+            ngram_range=(1, 2), min_df=3, max_features=MAX_FEATURES,
             sublinear_tf=True, strip_accents="unicode",
         )),
         ("clf", SGDClassifier(
@@ -77,8 +104,14 @@ def main():
     print(f"top-1 accuracy: {top1:.3f}")
     print(f"top-3 accuracy: {top3:.3f}")
 
+    # float32 coefficients halve the artifact size; this is a fallback model,
+    # not the one making the final call.
+    clf = pipe.named_steps["clf"]
+    clf.coef_ = clf.coef_.astype("float32")
+    clf.intercept_ = clf.intercept_.astype("float32")
+
     os.makedirs(MODEL_DIR, exist_ok=True)
-    joblib.dump(pipe, os.path.join(MODEL_DIR, "category_classifier.joblib"))
+    joblib.dump(pipe, os.path.join(MODEL_DIR, "category_classifier.joblib"), compress=3)
     with open(os.path.join(MODEL_DIR, "category_metrics.json"), "w") as f:
         json.dump({
             "top1_accuracy": round(float(top1), 4),
